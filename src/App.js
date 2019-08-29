@@ -15,6 +15,7 @@ class App extends Component {
   
   startTimer(event) {
     event.preventDefault();
+    event.target.timeInput.value = '';
     const now = Date.now();
     const then = now + this.state.minutes * 60 * 1000;
 
@@ -50,7 +51,7 @@ class App extends Component {
       <form onSubmit={this.startTimer}>
         <label>
           Enter Minutes For Countdown:
-          <input value={this.state.minutes} onChange={this.handleChange} type="text" />
+          <input name="timeInput" onChange={this.handleChange} type="text" />
         </label>
         <input type="submit" value="Submit" />
       </form>
