@@ -8,9 +8,13 @@ class App extends Component {
     this.state = {
       minutes: 10
     }
+    
+    this.handleChange = this.handleChange.bind(this);
+    this.startTimer = this.startTimer.bind(this);
   }
   
-  startTimer() {
+  startTimer(event) {
+    event.preventDefault();
     const now = Date.now();
     const then = now + this.state.minutes * 60 * 1000;
 
@@ -21,20 +25,35 @@ class App extends Component {
         clearInterval(countdown);
         return
       }
-      this.setState({
-        seconds: secondsLeft
-      })
+      this.displayTimeLeft(secondsLeft);
     }, 1000);
     
   }
 
-  componentDidMount() {
-    this.startTimer()
+  displayTimeLeft(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainderSeconds = seconds % 60;
+    const display = `${minutes}:${remainderSeconds < 10 ? '0' : '' }${remainderSeconds}`;
+
+    this.setState({
+      minutes: display
+    });
+  }
+
+  handleChange(event) {
+    this.setState({minutes: event.target.value});
   }
   
   render() {
     return (
       <div className="App">
+      <form onSubmit={this.startTimer}>
+        <label>
+          Enter Minutes For Countdown:
+          <input value={this.state.minutes} onChange={this.handleChange} type="text" />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
         <h1>{this.state.minutes}</h1>
       </div>
     )
