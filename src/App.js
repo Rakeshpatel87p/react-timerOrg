@@ -53,13 +53,14 @@ class App extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    let mins = event.target.value
-    this.setState({minutes: event.target.value, intervalId: undefined});
+    let mins = event.target.value || this.state.minutes
+    console.log(mins);
+    this.setState({minutes: mins, intervalId: undefined});
     this.startTimer(mins);
   }
 
   handleChange(event) {
-    //this.setState({minutes: event.target.value});
+    this.setState({minutes: event.target.value});
   }
   
   render() {
