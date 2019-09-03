@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
+import TimerHeader from './Components/TimerHeader'
 
 class App extends Component {
   constructor(props) {
@@ -8,7 +8,7 @@ class App extends Component {
     let countdown;
     this.state = {
       minutes: 0,
-      intervalId: countdown
+      intervalId: countdown,
     };
     this.quickTimers = [15, 25, 30];
     this.handleSubmit = this.handleSubmit.bind(this); //bind returns a copy of the function on which its invoked upon and allows us to set what the this value is
@@ -22,6 +22,7 @@ class App extends Component {
 
   componentDidMount() {
     clearInterval(this.state.intervalId);
+    document.addEventListener('mousedown', this.handleClickOutside);
   }
   
   startTimer(mins) {
@@ -62,21 +63,21 @@ class App extends Component {
   handleChange(event) {
     this.setState({minutes: event.target.value});
   }
+
+
   
   render() {
     return (
       <div className="App">
-        <h1>{this.state.minutes}</h1>
-        {this.quickTimers.map((time) => 
-          <button onClick={this.handleSubmit} value={time}>{time} mins</button>
+        <TimerHeader minutes={this.state.minutes} handleChange={this.handleChange}/>
+        {this.quickTimers.map((time, i) => 
+          <button key={i} onClick={this.handleSubmit} value={time}>{time} mins</button>
         )}
-        <form onSubmit={this.handleSubmit}>
-        <label>
-          Enter Minutes For Countdown:
-          <input name="timeInput" value={this.state.minutes} onChange={this.handleChange} type="text" />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
+        <div>
+          <button onClick={this.handleSubmit}>Start</button>
+          <button>Stop</button>
+          <button>Reset</button>
+        </div>
       </div>
     )
   }
