@@ -69,7 +69,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <TimerHeader minutes={this.state.minutes} handleChange={this.handleChange}/>
+        <TimerHeader intervalId={this.state.intervalId} minutes={this.state.minutes} handleChange={this.handleChange}/>
         {this.quickTimers.map((time, i) => 
           <button key={i} onClick={this.handleSubmit} value={time}>{time} mins</button>
         )}
