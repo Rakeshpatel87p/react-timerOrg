@@ -5,9 +5,35 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #61dafb;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 90vh;
+  text-align: center;
+}
+
+.timer {
+  color: white;
+  font-size: 100px;
+  font-weight: 300;
+}
+
+.presetTimerBtns {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 35px;
+}
+
+.presetTimerBtns button {
+  color:black;
+  cursor: pointer;
+  height: 50px;
+  width: 150px;
+  border: 0px;
+  border-radius: 5px;
+  margin: 0 10px;
 }

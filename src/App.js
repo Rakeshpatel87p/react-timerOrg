@@ -8,7 +8,7 @@ class App extends Component {
     let countdown;
     this.state = {
       minutes: 0,
-      intervalId: countdown,
+      intervalId: countdown
     };
     this.quickTimers = [15, 25, 30];
     this.handleSubmit = this.handleSubmit.bind(this); //bind returns a copy of the function on which its invoked upon and allows us to set what the this value is
@@ -71,8 +71,6 @@ class App extends Component {
   }
 
   handleClickOutside(event) {
-    console.log(event.target)
-    console.log(this.wrapperRef);
     if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
       alert('You clicked outside of me!');
     }
@@ -82,10 +80,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <TimerHeader intervalId={this.state.intervalId} minutes={this.state.minutes} handleChange={this.handleChange}/>
-        {this.quickTimers.map((time, i) => 
-          <button key={i} onClick={this.handleSubmit} value={time}>{time} mins</button>
-        )}
+        <TimerHeader intervalId={this.state.intervalId} inputToggle={this.state.inputToggle} minutes={this.state.minutes} handleChange={this.handleChange}/>
+        <div className="presetTimerBtns">
+          {this.quickTimers.map((time, i) => 
+            <button key={i} onClick={this.handleSubmit} value={time}>{time} mins</button>
+          )}
+        </div>
         <div>
           <button onClick={this.handleSubmit}>Start</button>
           <button>Stop</button>
