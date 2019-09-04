@@ -20,6 +20,7 @@ body {
   color: white;
   font-size: 100px;
   font-weight: 200;
+  margin-bottom: 35px;
 }
 
 .presetTimerBtns {
@@ -31,15 +32,17 @@ body {
 .presetTimerBtns button {
   border: 0px;
   border-radius: 100%;
+  box-shadow: 1px 1px 3px purple;
   color:black;
   cursor: pointer;
   font-size: 16px;
   height: 75px;
   margin: 0 10px;
-  transition: 1s all;
+  transition: 0.5s all;
   width: 75px;
 }
 
 .presetTimerBtns button:hover {
-  border: 1px solid blue;
+  box-shadow: 1px 1px 15px purple;
+  transform: scale(1.2);
 }
