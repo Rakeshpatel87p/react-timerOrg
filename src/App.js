@@ -8,7 +8,7 @@ class App extends Component {
     super(props);
     let countdown;
     this.state = {
-      minutes: 0,
+      minutes: '0:00',
       intervalId: countdown,
       isTicking: false
     };
@@ -17,13 +17,14 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.startTimer = this.startTimer.bind(this);
     this.clearTimer = this.clearTimer.bind(this);
+    this.pauseTimer = this.pauseTimer.bind(this);
   }
   
   startTimer(mins) {
     clearInterval(this.state.intervalId);
     const now = Date.now();
 
-    const then = now + mins * 60 * 1000
+    const then = now + mins * 1000
     this.countdown = setInterval(() => {
       const secondsLeft = Math.round((then - Date.now()) / 1000);
 
@@ -31,25 +32,17 @@ class App extends Component {
         clearInterval(this.countdown);
         return
       }
-      this.displayTimeLeft(secondsLeft);
+      //this.displayTimeLeft(secondsLeft);
+      this.setState({
+        minutes: secondsLeft
+      });
     }, 1000);
     this.setState({intervalId: this.countdown, isTicking: true})
   }
 
-  displayTimeLeft(seconds) {
-    const minutes = Math.floor(seconds / 60);
-    const remainderSeconds = seconds % 60;
-    const display = `${minutes}:${remainderSeconds < 10 ? '0' : '' }${remainderSeconds}`;
-
-    this.setState({
-      minutes: display
-    });
-  }
-
   handleSubmit(event) {
     event.preventDefault();
-    let mins = event.target.value || this.state.minutes
-    console.log(mins);
+    let mins = event.target.value * 60 || this.state.minutes;
     this.setState({minutes: mins, intervalId: undefined});
     this.startTimer(mins);
   }
@@ -60,7 +53,12 @@ class App extends Component {
 
   clearTimer() {
     clearInterval(this.state.intervalId);
-    this.setState({minutes: 0, isTicking: false})
+    this.setState({minutes: '0:00', isTicking: false})
+  }
+
+  pauseTimer() {
+    clearInterval(this.state.intervalId);
+    this.setState({isTicking: false});
   }
   
   render() {
@@ -72,7 +70,7 @@ class App extends Component {
             <button key={i} onClick={this.handleSubmit} value={time}>{time}</button>
           )}
         </div>
-        <TimeOperators isTicking={this.state.isTicking} handleSubmit={this.handleSubmit} clearTimer={this.clearTimer}/>
+        <TimeOperators isTicking={this.state.isTicking} handleSubmit={this.handleSubmit} clearTimer={this.clearTimer} pauseTimer={this.pauseTimer}/>
       </div>
     )
   }
