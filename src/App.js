@@ -14,18 +14,7 @@ class App extends Component {
     this.handleSubmit = this.handleSubmit.bind(this); //bind returns a copy of the function on which its invoked upon and allows us to set what the this value is
     this.handleChange = this.handleChange.bind(this);
     this.startTimer = this.startTimer.bind(this);
-    this.handleClickOutside = this.handleClickOutside.bind(this);
-    this.setWrapperRef = this.setWrapperRef.bind(this);
     this.clearTimer = this.clearTimer.bind(this);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.state.intervalId);
-  }
-
-  componentDidMount() {
-    clearInterval(this.state.intervalId);
-    document.addEventListener('mousedown', this.handleClickOutside);
   }
   
   startTimer(mins) {
@@ -70,16 +59,6 @@ class App extends Component {
 
   handleChange(event) {
     this.setState({minutes: event.target.value});
-  }
-
-  setWrapperRef(node) {
-    this.wrapperRef = TimerHeader;
-  }
-
-  handleClickOutside(event) {
-    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
-      alert('You clicked outside of me!');
-    }
   }
 
   
