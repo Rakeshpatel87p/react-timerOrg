@@ -32,7 +32,7 @@ body {
 .presetTimerBtns button {
   border: 0px;
   border-radius: 100%;
-  box-shadow: 1px 1px 3px purple;
+  box-shadow: 1px 1px 3px grey;
   color:black;
   cursor: pointer;
   font-size: 16px;
@@ -43,6 +43,6 @@ body {
 }
 
 .presetTimerBtns button:hover {
-  box-shadow: 1px 1px 15px purple;
+  box-shadow: 1px 1px 6px purple;
   transform: scale(1.2);
 }

@@ -16,6 +16,7 @@ class App extends Component {
     this.startTimer = this.startTimer.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
     this.setWrapperRef = this.setWrapperRef.bind(this);
+    this.clearTimer = this.clearTimer.bind(this);
   }
 
   componentWillUnmount() {
@@ -42,6 +43,11 @@ class App extends Component {
       this.displayTimeLeft(secondsLeft);
     }, 1000);
     this.setState({intervalId: this.countdown})
+  }
+
+  clearTimer() {
+    clearInterval(this.state.intervalId);
+    this.setState({minutes: 0})
   }
 
   displayTimeLeft(seconds) {
@@ -83,13 +89,13 @@ class App extends Component {
         <TimerHeader intervalId={this.state.intervalId} inputToggle={this.state.inputToggle} minutes={this.state.minutes} handleChange={this.handleChange}/>
         <div className="presetTimerBtns">
           {this.quickTimers.map((time, i) => 
-            <button key={i} onClick={this.handleSubmit} value={time}>{time} mins</button>
+            <button key={i} onClick={this.handleSubmit} value={time}>{time}</button>
           )}
         </div>
         <div>
           <button onClick={this.handleSubmit}>Start</button>
           <button>Stop</button>
-          <button>Reset</button>
+          <button onClick={this.clearTimer}>Reset</button>
         </div>
       </div>
     )
