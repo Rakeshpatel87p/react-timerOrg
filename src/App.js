@@ -8,7 +8,7 @@ class App extends Component {
     super(props);
     let countdown;
     this.state = {
-      minutes: '0:00',
+      minutes: 0,
       intervalId: countdown,
       isTicking: false
     };
@@ -53,7 +53,7 @@ class App extends Component {
 
   clearTimer() {
     clearInterval(this.state.intervalId);
-    this.setState({minutes: '0:00', isTicking: false})
+    this.setState({minutes: 0, isTicking: false})
   }
 
   pauseTimer() {
