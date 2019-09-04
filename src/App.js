@@ -32,7 +32,6 @@ class App extends Component {
         clearInterval(this.countdown);
         return
       }
-      //this.displayTimeLeft(secondsLeft);
       this.setState({
         minutes: secondsLeft
       });
