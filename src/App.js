@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import TimerHeader from './Components/TimerHeader'
+import TimerHeader from './Components/TimerHeader';
+import TimeOperators from './Components/TimeOperators';
 
 class App extends Component {
   constructor(props) {
@@ -8,7 +9,8 @@ class App extends Component {
     let countdown;
     this.state = {
       minutes: 0,
-      intervalId: countdown
+      intervalId: countdown,
+      isTicking: false
     };
     this.quickTimers = [15, 25, 30];
     this.handleSubmit = this.handleSubmit.bind(this); //bind returns a copy of the function on which its invoked upon and allows us to set what the this value is
@@ -31,12 +33,7 @@ class App extends Component {
       }
       this.displayTimeLeft(secondsLeft);
     }, 1000);
-    this.setState({intervalId: this.countdown})
-  }
-
-  clearTimer() {
-    clearInterval(this.state.intervalId);
-    this.setState({minutes: 0})
+    this.setState({intervalId: this.countdown, isTicking: true})
   }
 
   displayTimeLeft(seconds) {
@@ -61,6 +58,10 @@ class App extends Component {
     this.setState({minutes: event.target.value});
   }
 
+  clearTimer() {
+    clearInterval(this.state.intervalId);
+    this.setState({minutes: 0, isTicking: false})
+  }
   
   render() {
     return (
@@ -71,11 +72,7 @@ class App extends Component {
             <button key={i} onClick={this.handleSubmit} value={time}>{time}</button>
           )}
         </div>
-        <div>
-          <button onClick={this.handleSubmit}>Start</button>
-          <button>Stop</button>
-          <button onClick={this.clearTimer}>Reset</button>
-        </div>
+        <TimeOperators isTicking={this.state.isTicking} handleSubmit={this.handleSubmit} clearTimer={this.clearTimer}/>
       </div>
     )
   }
