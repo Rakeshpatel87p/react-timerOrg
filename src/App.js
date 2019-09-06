@@ -18,6 +18,7 @@ class App extends Component {
     this.startTimer = this.startTimer.bind(this);
     this.clearTimer = this.clearTimer.bind(this);
     this.pauseTimer = this.pauseTimer.bind(this);
+    this.enderTimerSound = new Audio('https://freesound.org/people/f-r-a-g-i-l-e/sounds/483449/');
   }
   
   startTimer(mins) {
@@ -35,6 +36,9 @@ class App extends Component {
       this.setState({
         minutes: secondsLeft
       });
+      if (secondsLeft === 0) {
+        this.enderTimerSound.play();
+      }
     }, 1000);
     this.setState({intervalId: this.countdown, isTicking: true})
   }

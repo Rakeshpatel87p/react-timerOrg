@@ -25,7 +25,7 @@ class TimerHeader extends Component {
         return (
             <div>
             { this.state.inputToggle ? 
-                <input name="timeInput" placeholder={this.props.minutes} value={this.props.minutes} onChange={this.props.handleChange} type="text" />
+                <input className="timer timerInput" name="timeInput" placeholder={this.props.minutes} value={this.props.minutes} onChange={this.props.handleChange} type="text" />
                 : <h1 className="timer" onClick={this.toggleInput}>{this.formatTime()}</h1>
             }
             </div>
