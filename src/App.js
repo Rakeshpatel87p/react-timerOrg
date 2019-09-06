@@ -70,7 +70,7 @@ class App extends Component {
         <TimerHeader intervalId={this.state.intervalId} inputToggle={this.state.inputToggle} minutes={this.state.minutes} handleChange={this.handleChange}/>
         <div className="presetTimerBtns">
           {this.quickTimers.map((time, i) => 
-            <button key={i} onClick={this.handleSubmit} value={time}>{time}</button>
+            <button className="circle" key={i} onClick={this.handleSubmit} value={time}>{time}</button>
           )}
         </div>
         <TimeOperators isTicking={this.state.isTicking} handleSubmit={this.handleSubmit} clearTimer={this.clearTimer} pauseTimer={this.pauseTimer}/>

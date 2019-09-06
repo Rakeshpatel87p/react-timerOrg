@@ -9,7 +9,7 @@ class TimeOperators extends Component {
                     <button className="videoBtns" onClick={this.props.pauseTimer}>||</button> : 
                     <button className="videoBtns" onClick={this.props.handleSubmit}>&#9658;</button>
                 }
-                <button onClick={this.props.clearTimer}>Reset</button>
+                <button className="videoBtns" onClick={this.props.clearTimer}>&#8634;</button>
           </div>
         )
     }
