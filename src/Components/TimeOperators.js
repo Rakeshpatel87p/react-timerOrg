@@ -6,8 +6,8 @@ class TimeOperators extends Component {
         return (
             <div>
                 {this.props.isTicking ? 
-                    <button onClick={this.props.pauseTimer}>Pause</button> : 
-                    <button onClick={this.props.handleSubmit}>Start</button>
+                    <button className="videoBtns" onClick={this.props.pauseTimer}>||</button> : 
+                    <button className="videoBtns" onClick={this.props.handleSubmit}>&#9658;</button>
                 }
                 <button onClick={this.props.clearTimer}>Reset</button>
           </div>
