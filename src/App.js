@@ -10,7 +10,8 @@ class App extends Component {
     this.state = {
       minutes: 0,
       intervalId: countdown,
-      isTicking: false
+      isTicking: false,
+      inputToggle: false,
     };
     this.quickTimers = [15, 25, 30];
     this.handleSubmit = this.handleSubmit.bind(this); //bind returns a copy of the function on which its invoked upon and allows us to set what the this value is
@@ -19,6 +20,7 @@ class App extends Component {
     this.clearTimer = this.clearTimer.bind(this);
     this.pauseTimer = this.pauseTimer.bind(this);
     this.enderTimerSound = new Audio('https://freesound.org/people/f-r-a-g-i-l-e/sounds/483449/');
+    this.toggleInput = this.toggleInput.bind(this);
   }
   
   startTimer(mins) {
@@ -45,9 +47,13 @@ class App extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    let mins = event.target.value * 60 || this.state.minutes;
-    this.setState({minutes: mins, intervalId: undefined});
-    this.startTimer(mins);
+    let mins = event.target.value * 60 || this.state.minutes * 60;
+
+    if (mins > 0) {
+      this.setState({minutes: mins, intervalId: undefined, inputToggle: false});
+      this.startTimer(mins);
+    }
+
   }
 
   handleChange(event) {
@@ -63,6 +69,12 @@ class App extends Component {
     clearInterval(this.state.intervalId);
     this.setState({isTicking: false});
   }
+
+  toggleInput() {
+    console.log('clicked')
+    this.setState({inputToggle: !this.state.inputToggle});
+    clearInterval(this.props.intervalId);
+  }
   
   render() {
     return (
@@ -73,7 +85,7 @@ class App extends Component {
             <button className="circle" key={i} onClick={this.handleSubmit} value={time}>{time}</button>
           )}
         </div>
-        <TimeOperators isTicking={this.state.isTicking} handleSubmit={this.handleSubmit} clearTimer={this.clearTimer} pauseTimer={this.pauseTimer}/>
+        <TimeOperators toggleInput={this.toggleInput} inputToggle={this.state.inputToggle} isTicking={this.state.isTicking} handleSubmit={this.handleSubmit} clearTimer={this.clearTimer} pauseTimer={this.pauseTimer}/>
       </div>
     )
   }

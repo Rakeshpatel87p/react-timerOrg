@@ -3,10 +3,7 @@ import React, {Component} from 'react'
 class TimerHeader extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            inputToggle: false
-        };
-        this.toggleInput = this.toggleInput.bind(this);
+        this.formatTime = this.formatTime.bind(this);
     }
 
     formatTime() {
@@ -14,19 +11,14 @@ class TimerHeader extends Component {
         const remainderSeconds = this.props.minutes % 60;
         const display = `${minutes}:${remainderSeconds < 10 ? '0' : '' }${remainderSeconds}`;
         return display;
-      }
-
-    toggleInput() {
-        this.setState({inputToggle: !this.state.inputToggle});
-        clearInterval(this.props.intervalId);
     }
 
     render() {
         return (
             <div>
-            { this.state.inputToggle ? 
-                <input className="timer timerInput" name="timeInput" placeholder={this.props.minutes} value={this.props.minutes} onChange={this.props.handleChange} type="text" />
-                : <h1 className="timer" onClick={this.toggleInput}>{this.formatTime()}</h1>
+            { this.props.inputToggle ? 
+                <input className="timer timerInput" name="timeInput" placeholder={this.props.minutes} onChange={this.props.handleChange} autoFocus={true} />
+                : <h1 className="timer" onClick={this.props.toggleInput}>{this.formatTime()}</h1>
             }
             </div>
         )
