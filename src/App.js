@@ -79,7 +79,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <TimerHeader toggleInput={this.toggleInput} intervalId={this.state.intervalId} inputToggle={this.state.inputToggle} minutes={this.state.minutes} handleChange={this.handleChange}/>
+        <TimerHeader toggleInput={this.toggleInput} intervalId={this.state.intervalId} inputToggle={this.state.inputToggle} minutes={this.state.minutes} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
         <div className="presetTimerBtns">
           {this.quickTimers.map((time, i) => 
             <button className="circle" key={i} onClick={this.handleSubmit} value={time}>{time}</button>
