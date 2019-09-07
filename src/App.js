@@ -70,22 +70,22 @@ class App extends Component {
     this.setState({isTicking: false});
   }
 
-  toggleInput() {
-    console.log('clicked')
-    this.setState({inputToggle: !this.state.inputToggle});
+  toggleInput(event) {
+    console.log(event)
+    this.setState({inputToggle: !this.state.inputToggle, isTicking: false});
     clearInterval(this.props.intervalId);
   }
   
   render() {
     return (
       <div className="App">
-        <TimerHeader intervalId={this.state.intervalId} inputToggle={this.state.inputToggle} minutes={this.state.minutes} handleChange={this.handleChange}/>
+        <TimerHeader toggleInput={this.toggleInput} intervalId={this.state.intervalId} inputToggle={this.state.inputToggle} minutes={this.state.minutes} handleChange={this.handleChange}/>
         <div className="presetTimerBtns">
           {this.quickTimers.map((time, i) => 
             <button className="circle" key={i} onClick={this.handleSubmit} value={time}>{time}</button>
           )}
         </div>
-        <TimeOperators toggleInput={this.toggleInput} inputToggle={this.state.inputToggle} isTicking={this.state.isTicking} handleSubmit={this.handleSubmit} clearTimer={this.clearTimer} pauseTimer={this.pauseTimer}/>
+        <TimeOperators inputToggle={this.state.inputToggle} isTicking={this.state.isTicking} handleSubmit={this.handleSubmit} clearTimer={this.clearTimer} pauseTimer={this.pauseTimer}/>
       </div>
     )
   }

@@ -17,7 +17,7 @@ class TimerHeader extends Component {
         return (
             <div>
             { this.props.inputToggle ? 
-                <input className="timer timerInput" name="timeInput" placeholder={this.props.minutes} onChange={this.props.handleChange} autoFocus={true} />
+                <input onClick={this.props.toggleInput} className="timer timerInput" name="timeInput" placeholder={this.formatTime()} onChange={this.props.handleChange} autoFocus={true} />
                 : <h1 className="timer" onClick={this.props.toggleInput}>{this.formatTime()}</h1>
             }
             </div>

@@ -37,8 +37,9 @@ body {
   border: none;
   color: white;
   cursor: pointer;
-  font-size: 50px;
+  font-size: 30px;
   transition: 0.5s all;
+  width: 40px;
 }
 
 .videoBtns:hover {
