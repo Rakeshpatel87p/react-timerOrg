@@ -33,7 +33,7 @@ body {
 }
 
 .videoBtns {
-  background: #61dafb;
+  background: transparent;
   border: none;
   color: white;
   cursor: pointer;

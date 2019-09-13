@@ -8,7 +8,7 @@ class App extends Component {
     super(props);
     let countdown;
     this.state = {
-      minutes: 0,
+      secondsRemaining: 0,
       intervalId: countdown,
       isTicking: false,
       inputToggle: false,
@@ -19,7 +19,6 @@ class App extends Component {
     this.startTimer = this.startTimer.bind(this);
     this.clearTimer = this.clearTimer.bind(this);
     this.pauseTimer = this.pauseTimer.bind(this);
-    this.enderTimerSound = new Audio('https://freesound.org/people/f-r-a-g-i-l-e/sounds/483449/');
     this.toggleInput = this.toggleInput.bind(this);
   }
   
@@ -36,33 +35,31 @@ class App extends Component {
         return
       }
       this.setState({
-        minutes: secondsLeft
+        secondsRemaining: secondsLeft
       });
-      if (secondsLeft === 0) {
-        this.enderTimerSound.play();
-      }
     }, 1000);
     this.setState({intervalId: this.countdown, isTicking: true})
   }
 
   handleSubmit(event) {
+    //console.log(time);
     event.preventDefault();
-    let mins = event.target.value * 60 || this.state.minutes * 60;
-
+    let mins = event.target.value * 60 || this.state.secondsRemaining;
+    console.log(event);
     if (mins > 0) {
-      this.setState({minutes: mins, intervalId: undefined, inputToggle: false});
+      this.setState({secondsRemaining: mins, intervalId: undefined, inputToggle: false});
       this.startTimer(mins);
     }
 
   }
 
   handleChange(event) {
-    this.setState({minutes: event.target.value});
+    this.setState({secondsRemaining: event.target.value * 60});
   }
 
   clearTimer() {
     clearInterval(this.state.intervalId);
-    this.setState({minutes: 0, isTicking: false})
+    this.setState({secondsRemaining: 0, isTicking: false})
   }
 
   pauseTimer() {
@@ -71,18 +68,17 @@ class App extends Component {
   }
 
   toggleInput(event) {
-    console.log(event)
     this.setState({inputToggle: !this.state.inputToggle, isTicking: false});
     clearInterval(this.props.intervalId);
   }
   
   render() {
     return (
-      <div className="App">
-        <TimerHeader toggleInput={this.toggleInput} intervalId={this.state.intervalId} inputToggle={this.state.inputToggle} minutes={this.state.minutes} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
+      <div className="App" style={{background: "rgb(255, 99, 71)"}}>
+        <TimerHeader toggleInput={this.toggleInput} intervalId={this.state.intervalId} inputToggle={this.state.inputToggle} secondsRemaining={this.state.secondsRemaining} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
         <div className="presetTimerBtns">
           {this.quickTimers.map((time, i) => 
-            <button className="circle" key={i} onClick={this.handleSubmit} value={time}>{time}</button>
+            <button className="circle" key={i} onClick={(e) => this.handleSubmit(e, time)} value={time}>{time}</button>
           )}
         </div>
         <TimeOperators inputToggle={this.state.inputToggle} isTicking={this.state.isTicking} handleSubmit={this.handleSubmit} clearTimer={this.clearTimer} pauseTimer={this.pauseTimer}/>
