@@ -20,6 +20,7 @@ class App extends Component {
     this.clearTimer = this.clearTimer.bind(this);
     this.pauseTimer = this.pauseTimer.bind(this);
     this.toggleInput = this.toggleInput.bind(this);
+    this.bckgrdColorEffect = this.bckgrdColorEffect.bind(this);
   }
   
   startTimer(mins) {
@@ -42,10 +43,8 @@ class App extends Component {
   }
 
   handleSubmit(event) {
-    //console.log(time);
     event.preventDefault();
     let mins = event.target.value * 60 || this.state.secondsRemaining;
-    console.log(event);
     if (mins > 0) {
       this.setState({secondsRemaining: mins, intervalId: undefined, inputToggle: false});
       this.startTimer(mins);
@@ -71,10 +70,18 @@ class App extends Component {
     this.setState({inputToggle: !this.state.inputToggle, isTicking: false});
     clearInterval(this.props.intervalId);
   }
+
+  bckgrdColorEffect() {
+    //(secondsRemaining / countdownTime) * 249 - 249
+    const countdownTime = 15 * 60;
+    const ratio = 249 - (((countdownTime - this.state.secondsRemaining + 1) / countdownTime) * 249);
+    console.log(ratio);
+    return {background: `rgb(${ratio}, 98, 71)`}
+  }
   
   render() {
     return (
-      <div className="App" style={{background: "rgb(255, 99, 71)"}}>
+      <div className="App" style={this.bckgrdColorEffect()}>
         <TimerHeader toggleInput={this.toggleInput} intervalId={this.state.intervalId} inputToggle={this.state.inputToggle} secondsRemaining={this.state.secondsRemaining} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
         <div className="presetTimerBtns">
           {this.quickTimers.map((time, i) => 
