@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import TimerHeader from './Components/TimerHeader';
 import TimeOperators from './Components/TimeOperators';
+import TaskInput from './Components/TaskInput';
 
 class App extends Component {
   constructor(props) {
@@ -65,7 +66,7 @@ class App extends Component {
     clearInterval(this.state.intervalId);
     this.setState({isTicking: false});
   }
-
+  //Redux
   toggleInput(event) {
     this.setState({inputToggle: !this.state.inputToggle, isTicking: false});
     clearInterval(this.props.intervalId);
@@ -75,20 +76,37 @@ class App extends Component {
     //(secondsRemaining / countdownTime) * 249 - 249
     const countdownTime = 15 * 60;
     const ratio = 249 - (((countdownTime - this.state.secondsRemaining + 1) / countdownTime) * 249);
-    console.log(ratio);
     return {background: `rgb(${ratio}, 98, 71)`}
   }
   
   render() {
     return (
       <div className="App" style={this.bckgrdColorEffect()}>
-        <TimerHeader toggleInput={this.toggleInput} intervalId={this.state.intervalId} inputToggle={this.state.inputToggle} secondsRemaining={this.state.secondsRemaining} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
+        <TimerHeader 
+          toggleInput={this.toggleInput} 
+          intervalId={this.state.intervalId} 
+          inputToggle={this.state.inputToggle} 
+          secondsRemaining={this.state.secondsRemaining} 
+          handleChange={this.handleChange} 
+          handleSubmit={this.handleSubmit}
+        />
         <div className="presetTimerBtns">
           {this.quickTimers.map((time, i) => 
-            <button className="circle" key={i} onClick={(e) => this.handleSubmit(e, time)} value={time}>{time}</button>
+            <button 
+              className="circle" 
+              key={i} onClick={(e) => this.handleSubmit(e, time)} 
+              value={time}>{time}
+            </button>
           )}
         </div>
-        <TimeOperators inputToggle={this.state.inputToggle} isTicking={this.state.isTicking} handleSubmit={this.handleSubmit} clearTimer={this.clearTimer} pauseTimer={this.pauseTimer}/>
+        <TimeOperators 
+          inputToggle={this.state.inputToggle} 
+          isTicking={this.state.isTicking} 
+          handleSubmit={this.handleSubmit} 
+          clearTimer={this.clearTimer} 
+          pauseTimer={this.pauseTimer}
+        />
+        <TaskInput />
       </div>
     )
   }
