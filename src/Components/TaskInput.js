@@ -23,8 +23,11 @@ class TaskInput extends Component {
     render() {
         return (
             <div>
-                {this.props.isTicking ?
-                    <h2>I'm <span>{this.state.tasks[0].task}</span></h2>
+                {this.props.isTicking || this.props.taskEntered ?
+                    <div>
+                        <h2>I'm <span>{this.state.tasks[0].task}</span></h2>
+                        <p>{this.props.taskEntered}</p>
+                    </div>
                     :
                     <form onSubmit={this.handleTaskSubmit}> 
                         <input 

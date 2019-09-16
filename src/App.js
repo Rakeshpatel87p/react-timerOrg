@@ -117,6 +117,7 @@ class App extends Component {
         <TaskInput 
           isTicking={this.state.isTicking}
           toggleTaskEntered={this.toggleTaskEntered}
+          taskEntered={this.state.taskEntered}
         />
       </div>
     )
