@@ -1,35 +1,16 @@
 import React, { Component } from 'react';
 
 class TaskInput extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            tasks: []
-        }
-
-        this.handleTaskSubmit = this.handleTaskSubmit.bind(this);
-    }
-    
-    handleTaskSubmit(event) {
-        event.preventDefault();
-        let task = event.target.task.value;
-        this.setState((prevState) => ({
-            tasks: [...prevState.tasks, {task}]
-        }))
-        this.props.toggleTaskEntered();
-        event.target.task.value = '';
-    }
 
     render() {
         return (
             <div>
                 {this.props.isTicking || this.props.taskEntered ?
                     <div>
-                        <h2>I'm <span>{this.state.tasks[0].task}</span></h2>
-                        <p>{this.props.taskEntered}</p>
+                        <h2>I'm <span>{this.props.currentTask}</span></h2>
                     </div>
                     :
-                    <form onSubmit={this.handleTaskSubmit}> 
+                    <form onSubmit={this.props.handleTaskSubmit}> 
                         <input 
                             autoFocus={true}
                             onChange={this.handleChange}

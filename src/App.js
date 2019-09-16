@@ -13,16 +13,17 @@ class App extends Component {
       intervalId: countdown,
       isTicking: false,
       inputToggle: false,
-      taskEntered: false
+      taskEntered: false,
+      tasks: []
     };
     this.quickTimers = [15, 25, 30];
     this.handleSubmit = this.handleSubmit.bind(this); //bind returns a copy of the function on which its invoked upon and allows us to set what the this value is
     this.handleChange = this.handleChange.bind(this);
+    this.handleTaskSubmit = this.handleTaskSubmit.bind(this);
     this.startTimer = this.startTimer.bind(this);
     this.clearTimer = this.clearTimer.bind(this);
     this.pauseTimer = this.pauseTimer.bind(this);
     this.toggleInput = this.toggleInput.bind(this);
-    this.toggleTaskEntered = this.toggleTaskEntered.bind(this);
     this.bckgrdColorEffect = this.bckgrdColorEffect.bind(this);
   }
   
@@ -55,6 +56,17 @@ class App extends Component {
 
   }
 
+  handleTaskSubmit(event) {
+    event.preventDefault();
+    let task = event.target.task.value;
+    this.setState((prevState) => ({
+        ...prevState,
+        taskEntered: !this.state.taskEntered,
+        tasks: [...prevState.tasks, {task}]
+    }))
+    event.target.task.value = '';
+}
+
   handleChange(event) {
     this.setState({secondsRemaining: event.target.value * 60});
   }
@@ -72,12 +84,6 @@ class App extends Component {
   toggleInput(event) {
     this.setState({inputToggle: !this.state.inputToggle, isTicking: false});
     clearInterval(this.props.intervalId);
-  }
-
-  toggleTaskEntered() {
-    this.setState({
-      taskEntered: !this.state.taskEntered
-    })
   }
 
   bckgrdColorEffect() {
@@ -116,8 +122,9 @@ class App extends Component {
         />
         <TaskInput 
           isTicking={this.state.isTicking}
-          toggleTaskEntered={this.toggleTaskEntered}
+          handleTaskSubmit={this.handleTaskSubmit}
           taskEntered={this.state.taskEntered}
+          currentTask={this.state.tasks.length > 0 ? this.state.tasks[this.state.tasks.length - 1].task : 'null'}
         />
       </div>
     )
