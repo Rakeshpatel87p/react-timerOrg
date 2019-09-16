@@ -13,6 +13,7 @@ class App extends Component {
       intervalId: countdown,
       isTicking: false,
       inputToggle: false,
+      taskEntered: false
     };
     this.quickTimers = [15, 25, 30];
     this.handleSubmit = this.handleSubmit.bind(this); //bind returns a copy of the function on which its invoked upon and allows us to set what the this value is
@@ -21,6 +22,7 @@ class App extends Component {
     this.clearTimer = this.clearTimer.bind(this);
     this.pauseTimer = this.pauseTimer.bind(this);
     this.toggleInput = this.toggleInput.bind(this);
+    this.toggleTaskEntered = this.toggleTaskEntered.bind(this);
     this.bckgrdColorEffect = this.bckgrdColorEffect.bind(this);
   }
   
@@ -72,6 +74,12 @@ class App extends Component {
     clearInterval(this.props.intervalId);
   }
 
+  toggleTaskEntered() {
+    this.setState({
+      taskEntered: !this.state.taskEntered
+    })
+  }
+
   bckgrdColorEffect() {
     //(secondsRemaining / countdownTime) * 249 - 249
     const countdownTime = 15 * 60;
@@ -106,7 +114,10 @@ class App extends Component {
           clearTimer={this.clearTimer} 
           pauseTimer={this.pauseTimer}
         />
-        <TaskInput />
+        <TaskInput 
+          isTicking={this.state.isTicking}
+          toggleTaskEntered={this.toggleTaskEntered}
+        />
       </div>
     )
   }

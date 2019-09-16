@@ -16,18 +16,25 @@ class TaskInput extends Component {
         this.setState((prevState) => ({
             tasks: [...prevState.tasks, {task}]
         }))
+        this.props.toggleTaskEntered();
+        event.target.task.value = '';
     }
-    
+
     render() {
         return (
             <div>
-                <form onSubmit={this.handleTaskSubmit}> 
-                    <input 
-                        autoFocus={true}
-                        onChange={this.handleChange}
-                        name="task" 
-                    />
-                </form>
+                {this.props.isTicking ?
+                    <h2>I'm <span>{this.state.tasks[0].task}</span></h2>
+                    :
+                    <form onSubmit={this.handleTaskSubmit}> 
+                        <input 
+                            autoFocus={true}
+                            onChange={this.handleChange}
+                            name="task" 
+                            placeholder={'Enter Task Here'}
+                        />
+                    </form>
+                }
             </div>
         )
     }
