@@ -4,6 +4,9 @@ import TimerHeader from './Components/TimerHeader';
 import TimeOperators from './Components/TimeOperators';
 import TaskInput from './Components/TaskInput';
 
+import { connect } from 'react-redux'
+import { isTicking } from './actions'
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -43,6 +46,7 @@ class App extends Component {
       });
     }, 1000);
     this.setState({intervalId: this.countdown, isTicking: true})
+    this.props.dispatch(isTicking(true));
   }
 
   handleSubmit(event) {
@@ -127,4 +131,10 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps({isTicking}) {
+  return {
+    isTicking
+  }
+}
+
+export default connect(mapStateToProps)(App);
