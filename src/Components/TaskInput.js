@@ -5,7 +5,7 @@ class TaskInput extends Component {
     render() {
         return (
             <div>
-                {this.props.isTicking || this.props.taskEntered ?
+                {this.props.isTicking || this.props.currentTask ?
                     <div>
                         <h2>I'm <span>{this.props.currentTask}</span></h2>
                     </div>

@@ -13,7 +13,6 @@ class App extends Component {
       intervalId: countdown,
       isTicking: false,
       inputToggle: false,
-      taskEntered: false,
       tasks: []
     };
     this.quickTimers = [15, 25, 30];
@@ -53,7 +52,6 @@ class App extends Component {
       this.setState({secondsRemaining: mins, intervalId: undefined, inputToggle: false});
       this.startTimer(mins);
     }
-
   }
 
   handleTaskSubmit(event) {
@@ -61,11 +59,10 @@ class App extends Component {
     let task = event.target.task.value;
     this.setState((prevState) => ({
         ...prevState,
-        taskEntered: !this.state.taskEntered,
         tasks: [...prevState.tasks, {task}]
     }))
     event.target.task.value = '';
-}
+  }
 
   handleChange(event) {
     this.setState({secondsRemaining: event.target.value * 60});
@@ -123,8 +120,7 @@ class App extends Component {
         <TaskInput 
           isTicking={this.state.isTicking}
           handleTaskSubmit={this.handleTaskSubmit}
-          taskEntered={this.state.taskEntered}
-          currentTask={this.state.tasks.length > 0 ? this.state.tasks[this.state.tasks.length - 1].task : 'null'}
+          currentTask={this.state.tasks.length > 0 ? this.state.tasks[this.state.tasks.length - 1].task : null}
         />
       </div>
     )
