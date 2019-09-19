@@ -117,7 +117,6 @@ class App extends Component {
         </div>
         <TimeOperators 
           inputToggle={this.state.inputToggle} 
-          isTicking={this.state.isTicking} 
           handleSubmit={this.handleSubmit} 
           clearTimer={this.clearTimer} 
           pauseTimer={this.pauseTimer}

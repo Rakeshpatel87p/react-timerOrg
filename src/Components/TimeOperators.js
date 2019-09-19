@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class TimeOperators extends Component {
     
@@ -15,4 +16,10 @@ class TimeOperators extends Component {
     }
 }
 
-export default TimeOperators
+function mapStateToProps({isTicking}) {
+    return {
+        isTicking: isTicking.bool
+    }
+}
+
+export default connect(mapStateToProps)(TimeOperators)
