@@ -5,14 +5,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #61dafb;
 }
 
 .App {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 90vh;
+  height: 100vh;
   text-align: center;
 }
 

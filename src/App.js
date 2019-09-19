@@ -89,7 +89,7 @@ class App extends Component {
 
   bckgrdColorEffect() {
     //(secondsRemaining / countdownTime) * 249 - 249
-    const countdownTime = 15 * 60;
+    const countdownTime = 25 * 60;
     const origVal = 249;
     const ratio = origVal - (((countdownTime - this.state.secondsRemaining + 1) / countdownTime) * 249);
     return {background: `rgb(${ratio <= 0 ? origVal : ratio}, 98, 71)`}
