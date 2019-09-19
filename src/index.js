@@ -9,9 +9,9 @@ import reducer from './reducers';
 
 import * as serviceWorker from './serviceWorker';
 
-const initialState = {rendering: true}
+const initialState = {}
 
-const store = createStore(reducer, initialState);
+const store = createStore(reducer);
 
 ReactDOM.render(
     <Provider store={store}>
