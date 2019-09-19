@@ -4,6 +4,7 @@ import { combineReducers } from 'redux'
 export function isTicking(state = {}, action) {
     switch(action.type) {
         case IS_TICKING :
+            console.log(action.bool);
             return state
 
         default:
