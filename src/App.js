@@ -19,17 +19,9 @@ class App extends Component {
       tasks: []
     };
     this.quickTimers = [15, 25, 30];
-    this.handleSubmit = this.handleSubmit.bind(this); //bind returns a copy of the function on which its invoked upon and allows us to set what the this value is
-    this.handleChange = this.handleChange.bind(this);
-    this.handleTaskSubmit = this.handleTaskSubmit.bind(this);
-    this.startTimer = this.startTimer.bind(this);
-    this.clearTimer = this.clearTimer.bind(this);
-    this.pauseTimer = this.pauseTimer.bind(this);
-    this.toggleInput = this.toggleInput.bind(this);
-    this.bckgrdColorEffect = this.bckgrdColorEffect.bind(this);
   }
   
-  startTimer(mins) {
+  startTimer = (mins) => {
     clearInterval(this.state.intervalId);
     const now = Date.now();
 
@@ -49,7 +41,7 @@ class App extends Component {
     this.props.dispatch(isTicking(true));
   }
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     event.preventDefault();
     let mins = event.target.value * 60 || this.state.secondsRemaining;
     if (mins > 0) {
@@ -58,7 +50,7 @@ class App extends Component {
     }
   }
 
-  handleTaskSubmit(event) {
+  handleTaskSubmit = (event) => {
     event.preventDefault();
     let task = event.target.task.value;
     this.setState((prevState) => ({
@@ -68,27 +60,26 @@ class App extends Component {
     event.target.task.value = '';
   }
 
-  handleChange(event) {
+  handleChange = (event) => {
     this.setState({secondsRemaining: event.target.value * 60});
   }
 
-  clearTimer() {
+  clearTimer = () => {
     clearInterval(this.state.intervalId);
     this.setState({secondsRemaining: 0, isTicking: false})
   }
 
-  pauseTimer() {
+  pauseTimer = () => {
     clearInterval(this.state.intervalId);
-    //this.setState({isTicking: false});
-    this.props.dispatch(isTicking(true));
+    this.props.dispatch(isTicking(false));
   }
   //Redux
-  toggleInput(event) {
+  toggleInput = (event) => {
     this.setState({inputToggle: !this.state.inputToggle, isTicking: false});
     clearInterval(this.props.intervalId);
   }
 
-  bckgrdColorEffect() {
+  bckgrdColorEffect = () => {
     //(secondsRemaining / countdownTime) * 249 - 249
     const countdownTime = 25 * 60;
     const origVal = 249;
@@ -116,7 +107,8 @@ class App extends Component {
             </button>
           )}
         </div>
-        <TimeOperators 
+        <TimeOperators
+          isTicking={this.props.isTicking} 
           inputToggle={this.state.inputToggle} 
           handleSubmit={this.handleSubmit} 
           clearTimer={this.clearTimer} 
