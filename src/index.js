@@ -9,9 +9,9 @@ import reducer from './reducers';
 
 import * as serviceWorker from './serviceWorker';
 
-const initialState = {}
+const initialState = {isTicking: true}
 
-const store = createStore(reducer);
+const store = createStore(reducer, initialState);
 
 ReactDOM.render(
     <Provider store={store}>

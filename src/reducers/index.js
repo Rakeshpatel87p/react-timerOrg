@@ -2,6 +2,7 @@ import { IS_TICKING, INPUT_TOGGLE } from '../actions'
 import { combineReducers } from 'redux'
 
 export function isTicking(state = {}, action) {
+    console.log(action)
     switch(action.type) {
         case IS_TICKING :
             return {

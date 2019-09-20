@@ -79,7 +79,8 @@ class App extends Component {
 
   pauseTimer() {
     clearInterval(this.state.intervalId);
-    this.setState({isTicking: false});
+    //this.setState({isTicking: false});
+    this.props.dispatch(isTicking(true));
   }
   //Redux
   toggleInput(event) {
@@ -132,6 +133,7 @@ class App extends Component {
 }
 
 function mapStateToProps({isTicking}) {
+  console.log(isTicking);
   return {
     isTicking
   }
