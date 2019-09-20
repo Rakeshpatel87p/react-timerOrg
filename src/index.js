@@ -9,7 +9,7 @@ import reducer from './reducers';
 
 import * as serviceWorker from './serviceWorker';
 
-const initialState = {isTicking: true}
+const initialState = {isTicking: false}
 
 const store = createStore(reducer, initialState);
 

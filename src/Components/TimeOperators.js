@@ -6,7 +6,7 @@ class TimeOperators extends Component {
     render() {
         return (
             <div>
-                {this.props.isTickingVal ? 
+                {this.props.isTicking ? 
                     <button className="videoBtns" onClick={this.props.pauseTimer}>||</button> : 
                     <button className="videoBtns" onClick={(e) => this.props.handleSubmit(e)}>&#9658;</button>
                 }
@@ -18,7 +18,7 @@ class TimeOperators extends Component {
 
 function mapStateToProps({isTicking}) {
     return {
-        isTickingVal: isTicking.bool
+        isTicking
     }
 }
 
