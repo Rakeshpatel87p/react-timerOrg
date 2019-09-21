@@ -9,7 +9,11 @@ import reducer from './reducers';
 
 import * as serviceWorker from './serviceWorker';
 
-const initialState = {isTicking: false}
+const initialState = {
+    clockStatus: {
+        isTicking: false,
+        sessionsCompleted: []
+    }}
 
 const store = createStore(reducer, initialState);
 

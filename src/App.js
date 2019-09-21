@@ -37,7 +37,7 @@ class App extends Component {
         secondsRemaining: secondsLeft
       });
     }, 1000);
-    this.setState({intervalId: this.countdown, isTicking: true})
+    this.setState({intervalId: this.countdown})
     this.props.dispatch(isTicking(true));
   }
 
@@ -66,7 +66,8 @@ class App extends Component {
 
   clearTimer = () => {
     clearInterval(this.state.intervalId);
-    this.setState({secondsRemaining: 0, isTicking: false})
+    this.setState({secondsRemaining: 0});
+    this.props.dispatch(isTicking(false));
   }
 
   pauseTimer = () => {
@@ -75,7 +76,8 @@ class App extends Component {
   }
   //Redux
   toggleInput = (event) => {
-    this.setState({inputToggle: !this.state.inputToggle, isTicking: false});
+    this.setState({inputToggle: !this.state.inputToggle});
+    this.props.dispatch(isTicking(false));
     clearInterval(this.props.intervalId);
   }
 
@@ -124,10 +126,9 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({isTicking}) {
-  console.log(isTicking);
+function mapStateToProps({clockStatus}) {
   return {
-    isTicking
+    isTicking: clockStatus.isTicking
   }
 }
 
