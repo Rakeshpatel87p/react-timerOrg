@@ -5,7 +5,7 @@ import TimeOperators from './Components/TimeOperators';
 import TaskInput from './Components/TaskInput';
 
 import { connect } from 'react-redux'
-import { isTicking } from './actions'
+import { isTicking, timedSessions } from './actions'
 
 class App extends Component {
   constructor(props) {
@@ -14,7 +14,6 @@ class App extends Component {
     this.state = {
       secondsRemaining: 0,
       intervalId: countdown,
-      isTicking: false,
       inputToggle: false,
       tasks: []
     };
@@ -31,6 +30,7 @@ class App extends Component {
 
       if (secondsLeft < 0) {
         clearInterval(this.countdown);
+        this.props.dispatch(timedSessions({sessionTime: mins, task: 'test', timeStampStart: now}))
         return
       }
       this.setState({
@@ -117,7 +117,7 @@ class App extends Component {
           pauseTimer={this.pauseTimer}
         />
         <TaskInput 
-          isTicking={this.state.isTicking}
+          isTicking={this.props.isTicking} 
           handleTaskSubmit={this.handleTaskSubmit}
           currentTask={this.state.tasks.length > 0 ? this.state.tasks[this.state.tasks.length - 1].task : null}
         />

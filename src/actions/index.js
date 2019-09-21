@@ -1,5 +1,5 @@
 export const IS_TICKING = 'IS_TICKING';
-export const SESSIONS_COMPLETED = 'SESSION_COMPLETE';
+export const TIMED_SESSIONS = 'SESSION_COMPLETE';
 export const INPUT_TOGGLE = 'INPUT_TOGGLE';
 
 export function isTicking(bool = false) {
@@ -9,13 +9,13 @@ export function isTicking(bool = false) {
     }
 }
 
-export function sessionComplete(sessionTime, task = undefined, timestamp) {
+export function timedSessions(sessionTime, task = undefined, timestampStart) {
+    console.log({sessionTime, task, timestampStart});
     return {
-        type: 'SESSIONS_COMPLETED',
+        type: 'TIMED_SESSIONS',
         sessionTime,
         task,
-        timestamp
-
+        timestampStart,
     }
 }
 
