@@ -39,6 +39,7 @@ class App extends Component {
     }, 1000);
     this.setState({intervalId: this.countdown})
     this.props.dispatch(isTicking(true));
+    this.props.dispatch(timedSessions({sessionTime: mins, task: 'test', timeStampStart: 0}))
   }
 
   handleSubmit = (event) => {
