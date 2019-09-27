@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import UserStats from './Components/UserStats';
+
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -18,9 +21,12 @@ const initialState = {
 const store = createStore(reducer, initialState);
 
 ReactDOM.render(
-    <Provider store={store}>
-        <App />
-    </Provider>, 
+    <Router>
+        <Provider store={store}>
+            <Route path='/' exact component={App} />
+            <Route path='/myStats' component={UserStats} />
+        </Provider>
+    </Router>, 
     document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
