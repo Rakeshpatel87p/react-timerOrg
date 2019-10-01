@@ -4,27 +4,63 @@ import BarChart from './Charts/BarChart';
 class UserStats extends Component {
     constructor(props) {
         super(props);
-
-        this.myData = [
+        //{sessionTime: mins, task: 'test', timeStampStart: 0}
+        this.rawData = [
             {
-              "name": "A",
-              "value": 46
+              "sessionTime" : 20,
+              "task" : "coding",
             },
             {
-              "name": "B",
-              "value": 87
+                "sessionTime" : 30,
+                "task" : "coding"
             },
+            {
+                "sessionTime" : 40,
+                "task" : "coding"
+            },
+            {
+                "sessionTime" : 60,
+                "task" : "coding"
+            },
+            {
+                "sessionTime": 10,
+                "task": "cooking"
+            }
           ];
+          
+          this.organizeData();
     }
+
+    organizeData = () => {
+        const sortedTasks = {};
+        
+        this.rawData.forEach((item) => {
+            if (!Object.keys(sortedTasks).includes(item.task)) {
+                sortedTasks[item.task] = {
+                    "sessionTimes": ["Test1"],
+                    "durations" : [item.sessionTime]
+                }
+            } else {
+                sortedTasks[item.task] = {
+                    ...sortedTasks[item.task],
+                    durations: [...sortedTasks[item.task].durations, item.sessionTime]
+                }
+            }
+        })
+
+        console.log(sortedTasks)
+    }
+    
     render() {
 
         return (
             <div>
+                {/*
                 <BarChart 
-                    data={this.myData}
                     title="Work Over Time"
                     color="#70CAD1"
                 />
+                */}
             </div>
         )
     }
