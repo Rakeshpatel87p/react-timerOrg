@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import BarChart from './Charts/BarChart';
 
+
 class UserStats extends Component {
     constructor(props) {
         super(props);
@@ -25,42 +26,49 @@ class UserStats extends Component {
             {
                 "sessionTime": 10,
                 "task": "cooking"
+            },
+            {
+                "sessionTime": 30,
+                "task": "cooking"
             }
           ];
-          
+          this.sortedTasks = {};
           this.organizeData();
     }
 
     organizeData = () => {
-        const sortedTasks = {};
-        
         this.rawData.forEach((item) => {
-            if (!Object.keys(sortedTasks).includes(item.task)) {
-                sortedTasks[item.task] = {
+            if (!Object.keys(this.sortedTasks).includes(item.task)) {
+                this.sortedTasks[item.task] = {
                     "sessionTimes": ["Test1"],
                     "durations" : [item.sessionTime]
                 }
             } else {
-                sortedTasks[item.task] = {
-                    ...sortedTasks[item.task],
-                    durations: [...sortedTasks[item.task].durations, item.sessionTime]
+                this.sortedTasks[item.task] = {
+                    ...this.sortedTasks[item.task],
+                    durations: [...this.sortedTasks[item.task].durations, item.sessionTime]
                 }
             }
         })
-
-        console.log(sortedTasks)
     }
-    
+
     render() {
 
         return (
             <div>
-                {/*
+                
                 <BarChart 
+                    data={this.sortedTasks}
                     title="Work Over Time"
                     color="#70CAD1"
+                    type="line"
                 />
-                */}
+                <BarChart 
+                    data={[{"data": [20, 30, 40]}]}
+                    title="Work Over Time"
+                    color="#70CAD1"
+                    type="pie"
+                />
             </div>
         )
     }
