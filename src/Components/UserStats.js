@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import BarChart from './Charts/BarChart';
-
+import TaskTable from './Charts/TaskTable'
 
 class UserStats extends Component {
     constructor(props) {
@@ -68,6 +68,9 @@ class UserStats extends Component {
                     title="Work Over Time"
                     color="#70CAD1"
                     type="pie"
+                />
+                <TaskTable 
+                    data={this.rawData}
                 />
             </div>
         )
