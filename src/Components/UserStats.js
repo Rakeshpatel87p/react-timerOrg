@@ -5,7 +5,7 @@ import TaskTable from './Charts/TaskTable'
 class UserStats extends Component {
     constructor(props) {
         super(props);
-        //{sessionTime: mins, task: 'test', timeStampStart: 0}
+
         this.rawData = [
             {
               "sessionTime" : 20,
@@ -61,15 +61,15 @@ class UserStats extends Component {
                     data={[{"data": [20, 30, 40]}]}
                     title="Work Over Time"
                     color="#70CAD1"
-                    chartType="pie"
-                    id="pieChart"
+                    chartType="doughnut"
+                    id="pieChart1"
                 />
                 <BarChart 
                     data={this.sortedTasks}
                     title="Work Over Time - Line"
                     color="#70CAD1"
                     chartType="line"
-                    id="lineChart"
+                    id="lineChart1"
                 />
                 <TaskTable 
                     data={this.rawData}
