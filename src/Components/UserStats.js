@@ -56,18 +56,20 @@ class UserStats extends Component {
 
         return (
             <div>
-                
-                <BarChart 
-                    data={this.sortedTasks}
-                    title="Work Over Time"
-                    color="#70CAD1"
-                    type="line"
-                />
+                <h1>How I'm Doing:</h1>
                 <BarChart 
                     data={[{"data": [20, 30, 40]}]}
                     title="Work Over Time"
                     color="#70CAD1"
-                    type="pie"
+                    chartType="pie"
+                    id="pieChart"
+                />
+                <BarChart 
+                    data={this.sortedTasks}
+                    title="Work Over Time - Line"
+                    color="#70CAD1"
+                    chartType="line"
+                    id="lineChart"
                 />
                 <TaskTable 
                     data={this.rawData}

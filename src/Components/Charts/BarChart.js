@@ -7,6 +7,7 @@ class BarChart extends Component {
     constructor(props) {
         super(props);
         this.chartRef = React.createRef();
+        console.log(this.chartRef);
     }
     
     componentDidMount() {
@@ -15,10 +16,10 @@ class BarChart extends Component {
     
     buildChart = () => {
         const myChartRef = this.chartRef.current.getContext("2d");
-        console.log(myChartRef);
         const sortedTasks = this.props.data;
         let tasksDataSet = [];
-        if (this.props.type === "line") {
+        
+        if (this.props.chartType === "line") {
             tasksDataSet = Object.keys(sortedTasks).map((key) => {
                 return {
                     label: key,
@@ -30,23 +31,11 @@ class BarChart extends Component {
             tasksDataSet = sortedTasks
         }
 
-        if (typeof myLineChart !== "undefined") myLineChart.destroy();
-
-        myLineChart = new Chart(myChartRef, {
-            type: this.props.type,
+        myLineChart = new Chart(this.props.id, {
+            type: this.props.chartType,
             data: {
                 datasets: tasksDataSet
             }
-            /*
-            labels: ['Red', 'Yellow', 'Blue'],
-            data: {
-                //Bring in data
-                datasets: [10, 20, 30]
-            },
-            options: {
-                //Customize chart options
-            }
-            */
         });
     }
     
@@ -54,7 +43,7 @@ class BarChart extends Component {
         return (
             <div>
                 <canvas
-                id={`myChart${this.i}`}
+                id={this.props.id }
                 ref={this.chartRef} />
             </div>
         )
