@@ -6,9 +6,10 @@ import UserStats from './Components/UserStats';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './reducers';
+import thunk from 'redux-thunk';
 
 import * as serviceWorker from './serviceWorker';
 
@@ -18,7 +19,11 @@ const initialState = {
         sessionsCompleted: []
     }}
 
-const store = createStore(reducer, initialState);
+const store = createStore(
+    reducer, 
+    initialState,
+    applyMiddleware(thunk)
+);
 
 ReactDOM.render(
     <Router>

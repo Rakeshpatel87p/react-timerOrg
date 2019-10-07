@@ -1,4 +1,4 @@
-import { IS_TICKING, TIMED_SESSIONS} from '../actions/'
+import { IS_TICKING } from '../actions/'
 
 export default function clockStatus(state = {}, action) {
     switch(action.type) {
@@ -7,10 +7,6 @@ export default function clockStatus(state = {}, action) {
                 ...state,
                 isTicking: action.bool
             }
-        case TIMED_SESSIONS : 
-            return [
-                state
-            ]
         
         default: 
             return state

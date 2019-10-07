@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import BarChart from './Charts/BarChart';
-import TaskTable from './Charts/TaskTable'
+import TaskTable from './Charts/TaskTable';
+import { fetchTimedSessions } from '../actions/timedSessions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 class UserStats extends Component {
     constructor(props) {
@@ -34,6 +37,11 @@ class UserStats extends Component {
           ];
           this.sortedTasks = {};
           this.organizeData();
+    }
+
+    componentWillMount() {
+        //const { fetchTimedSessions } = this.props;
+        this.props.dispatch(fetchTimedSessions());
     }
 
     organizeData = () => {
@@ -79,4 +87,8 @@ class UserStats extends Component {
     }
 }
 
-export default UserStats
+function mapDispatchToProps(dispatch) {
+    bindActionCreators({fetchTimedSessions}, dispatch)
+}
+
+export default connect(mapDispatchToProps)(UserStats)

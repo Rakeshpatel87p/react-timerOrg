@@ -7,7 +7,6 @@ class BarChart extends Component {
     constructor(props) {
         super(props);
         this.chartRef = React.createRef();
-        console.log(this.chartRef);
     }
     
     componentDidMount() {

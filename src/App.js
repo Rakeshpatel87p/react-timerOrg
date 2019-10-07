@@ -5,7 +5,8 @@ import TimeOperators from './Components/TimeOperators';
 import TaskInput from './Components/TaskInput';
 
 import { connect } from 'react-redux'
-import { isTicking, timedSessions } from './actions'
+import { isTicking } from './actions'
+import { timedSessions } from './actions/timedSessions'
 
 class App extends Component {
   constructor(props) {
