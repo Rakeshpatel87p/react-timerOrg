@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import BarChart from './Charts/BarChart';
 import TaskTable from './Charts/TaskTable';
-import { fetchTimedSessions } from '../actions/timedSessions';
+import { fetchTimedSessions, fetchTimedSessionsSuccess } from '../actions/timedSessions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -39,9 +39,14 @@ class UserStats extends Component {
           this.organizeData();
     }
 
-    componentWillMount() {
-        //const { fetchTimedSessions } = this.props;
-        this.props.dispatch(fetchTimedSessions());
+    componentDidMount() {
+        const { fetchTimedSessions } = this.props;
+        fetchTimedSessions();
+        //this.props.dispatch(fetchTimedSessions);
+    }
+
+    componentDidUpdate() {
+        console.log(this.props.success)
     }
 
     organizeData = () => {
@@ -65,6 +70,7 @@ class UserStats extends Component {
         return (
             <div>
                 <h1>How I'm Doing:</h1>
+                {this.props.success.sessions? <h2>{this.props.success.sessions.title}</h2> : null}
                 <BarChart 
                     data={[{"data": [20, 30, 40]}]}
                     title="Work Over Time"
@@ -87,8 +93,17 @@ class UserStats extends Component {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    bindActionCreators({fetchTimedSessions}, dispatch)
+function mapStateToProps(state) {
+    return {
+        success: state.timedSessions
+    }
 }
 
-export default connect(mapDispatchToProps)(UserStats)
+function mapDispatchToProps(dispatch) {
+    return {
+       fetchTimedSessions: () => {dispatch(fetchTimedSessions())},
+       fetchTimedSessionsSuccess: () => {dispatch(fetchTimedSessionsSuccess())}
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserStats)

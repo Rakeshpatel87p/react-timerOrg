@@ -12,11 +12,11 @@ export default function timedSessions(state = {}, action) {
                 loading: true,
                 error: null
             }
-        case FETCH_TIMED_SESSIONS_SUCCESS : 
+        case FETCH_TIMED_SESSIONS_SUCCESS :
             return {
                 ...state,
                 loading: false,
-                timedSessions: action.payload.timedSessions
+                sessions: action.sessions
             }
 
         case FETCH_TIMED_SESSIONS_FAILURE:

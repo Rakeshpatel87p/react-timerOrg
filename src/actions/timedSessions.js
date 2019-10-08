@@ -14,12 +14,11 @@ export function timedSessions(sessionTime, task = undefined, timestampStart) {
 }
 
 export function fetchTimedSessions() {
-    return dispatch => {
+    return (dispatch) => {
         dispatch(fetchTimedSessionsBegin())
         fetch('https://jsonplaceholder.typicode.com/todos/1')
             .then(response => response.json())
             .then(res => {
-                console.log(res);
                 if (res.error) {
                     throw(res.error);
                 }
@@ -27,20 +26,22 @@ export function fetchTimedSessions() {
                 return res;
             })
             .catch(error => {
-                dispatch(fetchTimedSessionsFailure(error))
+                dispatch(fetchTimedSessionsFailure(error));
             })
     }
 }
 
 export function fetchTimedSessionsBegin() {
     return {
-        type: 'FETCH_TIMED_SESSIONS_BEGIN'
+        type: 'FETCH_TIMED_SESSIONS_BEGIN',
+        
     }
 }
 
-export function fetchTimedSessionsSuccess() {
+export function fetchTimedSessionsSuccess(sessions) {
     return {
-        type: 'FETCH_TIMED_SESSIONS_SUCCESS'
+        type: 'FETCH_TIMED_SESSIONS_SUCCESS',
+        sessions
     }
 }
 
