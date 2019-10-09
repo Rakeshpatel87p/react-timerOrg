@@ -24,7 +24,6 @@ export default function timedSessions(state = {}, action) {
                 ...state,
                 loading: false,
                 //error: action.payload.error,
-                timedSessions: []
             }
         
         default: 

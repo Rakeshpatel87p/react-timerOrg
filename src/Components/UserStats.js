@@ -69,25 +69,30 @@ class UserStats extends Component {
 
         return (
             <div>
-                <h1>How I'm Doing:</h1>
-                {this.props.success.sessions? <h2>{this.props.success.sessions.title}</h2> : <h2>Loading...</h2>}
-                <BarChart 
-                    data={[{"data": [20, 30, 40]}]}
-                    title="Work Over Time"
-                    color="#70CAD1"
-                    chartType="doughnut"
-                    id="pieChart1"
-                />
-                <BarChart 
-                    data={this.sortedTasks}
-                    title="Work Over Time - Line"
-                    color="#70CAD1"
-                    chartType="line"
-                    id="lineChart1"
-                />
-                <TaskTable 
-                    data={this.rawData}
-                />
+                {(this.props.success.loading) ? 
+                    <h2>Crunching the Numbers...</h2> :
+                    <div>
+                        <h1>How I'm Doing:</h1> 
+                        <BarChart 
+                            data={[{"data": [20, 30, 40]}]}
+                            title="Work Over Time"
+                            color="#70CAD1"
+                            chartType="doughnut"
+                            id="pieChart1"
+                            sessions={this.props.success.sessions}
+                        />
+                        <BarChart 
+                            data={this.sortedTasks}
+                            title="Work Over Time - Line"
+                            color="#70CAD1"
+                            chartType="line"
+                            id="lineChart1"
+                        />
+                        <TaskTable 
+                            data={this.rawData}
+                        />
+                    </div>
+                }
             </div>
         )
     }
