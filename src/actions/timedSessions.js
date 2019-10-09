@@ -22,7 +22,10 @@ export function fetchTimedSessions() {
                 if (res.error) {
                     throw(res.error);
                 }
-                dispatch(fetchTimedSessionsSuccess(res));
+                setTimeout(() => {
+                    dispatch(fetchTimedSessionsSuccess(res));
+                }, 2000)
+                
                 return res;
             })
             .catch(error => {

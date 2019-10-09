@@ -70,7 +70,7 @@ class UserStats extends Component {
         return (
             <div>
                 <h1>How I'm Doing:</h1>
-                {this.props.success.sessions? <h2>{this.props.success.sessions.title}</h2> : null}
+                {this.props.success.sessions? <h2>{this.props.success.sessions.title}</h2> : <h2>Loading...</h2>}
                 <BarChart 
                     data={[{"data": [20, 30, 40]}]}
                     title="Work Over Time"
