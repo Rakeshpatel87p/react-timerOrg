@@ -13,6 +13,7 @@ export default function timedSessions(state = {}, action) {
                 error: null
             }
         case FETCH_TIMED_SESSIONS_SUCCESS :
+            console.log(action.sessions);
             return {
                 ...state,
                 loading: false,

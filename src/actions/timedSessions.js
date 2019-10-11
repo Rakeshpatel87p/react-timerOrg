@@ -18,26 +18,8 @@ export function fetchTimedSessions() {
     return (dispatch) => {
         dispatch(fetchTimedSessionsBegin())
         mockSessionsDataRef.once('value').then((snapshot) => {
-            console.log(snapshot.val());
             dispatch(fetchTimedSessionsSuccess(snapshot.val()));
         })
-        /*
-        fetch('https://jsonplaceholder.typicode.com/todos/1')
-            .then(response => response.json())
-            .then(res => {
-                if (res.error) {
-                    throw(res.error);
-                }
-                setTimeout(() => {
-                    dispatch(fetchTimedSessionsSuccess(res));
-                }, 2000)
-
-                return res;
-            })
-            .catch(error => {
-                dispatch(fetchTimedSessionsFailure(error));
-            })
-            */
     }
 }
 

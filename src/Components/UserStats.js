@@ -8,45 +8,13 @@ import { bindActionCreators } from 'redux';
 class UserStats extends Component {
     constructor(props) {
         super(props);
-
-        this.rawData = [
-            {
-              "sessionTime" : 20,
-              "task" : "coding",
-            },
-            {
-                "sessionTime" : 30,
-                "task" : "coding"
-            },
-            {
-                "sessionTime" : 40,
-                "task" : "coding"
-            },
-            {
-                "sessionTime" : 60,
-                "task" : "coding"
-            },
-            {
-                "sessionTime": 10,
-                "task": "cooking"
-            },
-            {
-                "sessionTime": 30,
-                "task": "cooking"
-            }
-          ];
-          this.sortedTasks = {};
-          this.organizeData();
+        this.sortedTasks = {};
     }
 
     componentDidMount() {
         const { fetchTimedSessions } = this.props;
         fetchTimedSessions();
-        //this.props.dispatch(fetchTimedSessions);
-    }
-
-    componentDidUpdate() {
-        console.log(this.props.success)
+        //this.organizeData();
     }
 
     organizeData = () => {
@@ -69,7 +37,7 @@ class UserStats extends Component {
 
         return (
             <div>
-                {(this.props.success.loading) ? 
+                {(this.props.mockData.loading) ? 
                     <h2>Crunching the Numbers...</h2> :
                     <div>
                         <h1>How I'm Doing:</h1> 
@@ -79,7 +47,6 @@ class UserStats extends Component {
                             color="#70CAD1"
                             chartType="doughnut"
                             id="pieChart1"
-                            sessions={this.props.success.sessions}
                         />
                         <BarChart 
                             data={this.sortedTasks}
@@ -89,7 +56,6 @@ class UserStats extends Component {
                             id="lineChart1"
                         />
                         <TaskTable 
-                            data={this.rawData}
                         />
                     </div>
                 }
@@ -100,7 +66,7 @@ class UserStats extends Component {
 
 function mapStateToProps(state) {
     return {
-        success: state.timedSessions
+        mockData: state.timedSessions
     }
 }
 

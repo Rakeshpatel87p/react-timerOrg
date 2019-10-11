@@ -12,7 +12,6 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-const databaseRef = firebase.database().ref('sessions/');
-console.log(firebase.database().ref('sessions/'));
+const databaseRef = firebase.database().ref('mockData/');
 
 export const mockSessionsDataRef = databaseRef;
