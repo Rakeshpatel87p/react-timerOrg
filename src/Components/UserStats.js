@@ -3,7 +3,6 @@ import BarChart from './Charts/BarChart';
 import TaskTable from './Charts/TaskTable';
 import { fetchTimedSessions, fetchTimedSessionsSuccess } from '../actions/timedSessions';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 class UserStats extends Component {
     constructor(props) {
@@ -13,12 +12,13 @@ class UserStats extends Component {
 
     componentDidMount() {
         const { fetchTimedSessions } = this.props;
-        fetchTimedSessions();
-        //this.organizeData();
+        const x = fetchTimedSessions()
+        console.log(x);
     }
 
-    organizeData = () => {
-        this.rawData.forEach((item) => {
+    organizeData = (data) => {
+        console.log(data);
+        data.forEach((item) => {
             if (!Object.keys(this.sortedTasks).includes(item.task)) {
                 this.sortedTasks[item.task] = {
                     "sessionTimes": ["Test1"],
@@ -37,7 +37,7 @@ class UserStats extends Component {
 
         return (
             <div>
-                {(this.props.mockData.loading) ? 
+                {(this.props.fetchObj.loading) ? 
                     <h2>Crunching the Numbers...</h2> :
                     <div>
                         <h1>How I'm Doing:</h1> 
@@ -66,7 +66,8 @@ class UserStats extends Component {
 
 function mapStateToProps(state) {
     return {
-        mockData: state.timedSessions
+        fetchObj: state.timedSessions,
+        sessions: state.timedSessions.sessions
     }
 }
 

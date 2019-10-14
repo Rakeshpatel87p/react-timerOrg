@@ -1,5 +1,4 @@
 import { 
-    TIMED_SESSIONS, 
     FETCH_TIMED_SESSIONS_BEGIN, 
     FETCH_TIMED_SESSIONS_SUCCESS, 
     FETCH_TIMED_SESSIONS_FAILURE } from '../actions/timedSessions';
@@ -13,7 +12,6 @@ export default function timedSessions(state = {}, action) {
                 error: null
             }
         case FETCH_TIMED_SESSIONS_SUCCESS :
-            console.log(action.sessions);
             return {
                 ...state,
                 loading: false,

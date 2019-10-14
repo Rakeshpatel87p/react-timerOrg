@@ -13,5 +13,6 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 const databaseRef = firebase.database().ref('mockData/');
-
+export const rakeshWorkSessions = firebase.database().ref('rakeshWorkSessions');
 export const mockSessionsDataRef = databaseRef;
+

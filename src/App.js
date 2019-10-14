@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import TimerHeader from './Components/TimerHeader';
 import TimeOperators from './Components/TimeOperators';
 import TaskInput from './Components/TaskInput';
