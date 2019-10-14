@@ -2,6 +2,10 @@ import { rakeshWorkSessions } from '../firebase';
 
 export const IS_TICKING = 'IS_TICKING';
 export const INPUT_TOGGLE = 'INPUT_TOGGLE';
+export const WRITE_TASK_DB_BEGIN = 'WRITE_TASK_DB_BEGIN';
+export const WRITE_TASK_DB_SUCCESS = 'WRITE_TASK_DB_SUCCESS';
+export const WRITE_TASK_DB_FAILURE = 'WRITE_TASK_DB_FAILURE';
+
 
 export function isTicking(bool = false) {
     return {
@@ -47,5 +51,3 @@ export function writeTaskDbFailure(err) {
         err
     }
 }
-
-//Fetching data actions 
