@@ -21,14 +21,15 @@ export function inputToggle(bool) {
     }
 }
 
-export function writeTaskToDb() {
+export function writeTaskDb(session) {
     return (dispatch) => {
         dispatch(writeTaskDbBegin());
-        rakeshWorkSessions().set({
-            sessionTime: "test",
-            task: "test"
-        })
-        dispatch(writeTaskDbSuccess())
+        rakeshWorkSessions.set({
+            "sessionTime" : session.sessionTime,
+            "task": session.task
+        });
+        const msg = 'success';
+        dispatch(writeTaskDbSuccess(msg));
 
     }
 }
@@ -39,9 +40,10 @@ export function writeTaskDbBegin() {
     }
 }
 
-export function writeTaskDbSuccess() {
+export function writeTaskDbSuccess(msg) {
     return {
-        type: 'WRITE_TASK_DB_SUCCESS'
+        type: 'WRITE_TASK_DB_SUCCESS',
+        msg
     }
 }
 

@@ -13,7 +13,8 @@ class UserStats extends Component {
     componentDidMount() {
         const { fetchTimedSessions } = this.props;
         const x = fetchTimedSessions()
-        console.log(x);
+        //console.log(x);
+        //x.then((res) => console.log(res));
     }
 
     organizeData = (data) => {
@@ -72,8 +73,14 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
+    //clean data here
     return {
-       fetchTimedSessions: () => {dispatch(fetchTimedSessions())},
+       fetchTimedSessions: () => {
+           const data = dispatch(fetchTimedSessions());
+           console.log(data);
+           data.then((res) => console.log(res))
+           return data
+        },
        fetchTimedSessionsSuccess: () => {dispatch(fetchTimedSessionsSuccess())}
     }
 }

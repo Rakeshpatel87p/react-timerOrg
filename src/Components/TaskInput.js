@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { writeTaskDb, writeTaskDbSuccess, writeTaskDbFailure } from '../actions'
+import { connect } from 'react-redux';
 
 class TaskInput extends Component {
 
@@ -10,7 +12,7 @@ class TaskInput extends Component {
                         <h2>I'm <span>{this.props.currentTask}</span></h2>
                     </div>
                     :
-                    <form onSubmit={this.props.handleTaskSubmit}> 
+                    <form onSubmit={this.props.writeTaskDb({"sessionTime" : 100, "task" : "test"})}> 
                         <input 
                             autoFocus={true}
                             onChange={this.handleChange}
@@ -24,4 +26,12 @@ class TaskInput extends Component {
     }
 }
 
-export default TaskInput;
+function mapDispatchToProps(dispatch) {
+    return {
+        writeTaskDb: (session) => dispatch(writeTaskDb(session)),
+        writeTaskDbSuccess: () => dispatch(writeTaskDbSuccess()),
+        writeTaskDbFailure: () => dispatch(writeTaskDbFailure())
+    }
+}
+
+export default connect(null, mapDispatchToProps)(TaskInput);
