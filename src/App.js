@@ -3,9 +3,7 @@ import TimerHeader from './Components/TimerHeader';
 import TimeOperators from './Components/TimeOperators';
 import TaskInput from './Components/TaskInput';
 
-import { connect } from 'react-redux'
-import { isTicking } from './actions'
-import { timedSessions } from './actions/timedSessions'
+import { timedSessions } from './actions/timedSessions';
 
 class App extends Component {
   constructor(props) {
@@ -16,7 +14,8 @@ class App extends Component {
       secondsRemaining: 0,
       intervalId: countdown,
       inputToggle: false,
-      task: null
+      task: null,
+      isTicking: false
 
     };
     this.quickTimers = [15, 25, 30];
@@ -31,20 +30,24 @@ class App extends Component {
       const secondsLeft = Math.round((then - Date.now()) / 1000);
 
       if (secondsLeft < 0) {
-        //take entered task if exist
-        //take countdown start
-        //dispatch action to write sessionComplete to db
-        clearInterval(this.countdown);
-        this.props.dispatch(timedSessions({sessionTime: mins, task: 'test', timeStampStart: now}))
-        return
+        this.timerComplete();
       }
+
       this.setState({
         secondsRemaining: secondsLeft
       });
     }, 1000);
-    this.setState({intervalId: this.countdown})
-    this.props.dispatch(isTicking(true));
-    //this.props.dispatch(timedSessions({sessionTime: mins, task: 'test', timeStampStart: 0}))
+
+    this.setState({intervalId: this.countdown, isTicking: true})
+  }
+
+  timerComplete = () => {
+    //take entered task if exist
+    //take countdown start
+    //dispatch action to write sessionComplete to db
+    clearInterval(this.countdown);
+    //this.props.dispatch(timedSessions({sessionTime: mins, task: 'test', timeStampStart: now}))
+    return
   }
 
   handleSubmit = (event) => {
@@ -59,10 +62,7 @@ class App extends Component {
   handleTaskSubmit = (event) => {
     event.preventDefault();
     let enteredTask = event.target.task.value;
-    this.setState((prevState) => ({
-        ...prevState,
-        task: enteredTask
-    }))
+    this.setState({task: enteredTask})
     event.target.task.value = '';
   }
 
@@ -72,23 +72,20 @@ class App extends Component {
 
   clearTimer = () => {
     clearInterval(this.state.intervalId);
-    this.setState({secondsRemaining: 0});
-    this.props.dispatch(isTicking(false));
+    this.setState({secondsRemaining: 0, isTicking: false});
   }
 
   pauseTimer = () => {
     clearInterval(this.state.intervalId);
-    this.props.dispatch(isTicking(false));
+    this.setState({isTicking: false})
   }
   //Redux
   toggleInput = (event) => {
-    this.setState({inputToggle: !this.state.inputToggle});
-    this.props.dispatch(isTicking(false));
+    this.setState({inputToggle: !this.state.inputToggle, isTicking: false});
     clearInterval(this.props.intervalId);
   }
 
   bckgrdColorEffect = () => {
-    //(secondsRemaining / countdownTime) * 249 - 249
     const countdownTime = 25 * 60;
     const origVal = 249;
     const ratio = origVal - (((countdownTime - this.state.secondsRemaining + 1) / countdownTime) * 249);
@@ -130,10 +127,4 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({clockStatus}) {
-  return {
-    isTicking: clockStatus.isTicking
-  }
-}
-
-export default connect(mapStateToProps)(App);
+export default App;
