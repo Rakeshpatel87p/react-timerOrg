@@ -1,1 +1,3 @@
-Simple React Timer App and way to organize tasks to see how you spend time.
+React Timer Application User Statistic Dashboard so participants can see how they spend their time.
+
+Tech Used: React, Redux, Thunk, Chart.js, Firebase.
