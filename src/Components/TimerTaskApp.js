@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import TimerHeader from './Components/TimerHeader';
-import TimeOperators from './Components/TimeOperators';
-import TaskInput from './Components/TaskInput';
+import TimerHeader from './Timer/TimerHeader';
+import TimeOperators from './Timer/TimeOperators';
+import TaskInput from './Timer/TaskInput';
 
-import { timedSessions } from './actions/timedSessions';
+import { timedSessions } from '../Actions/timedSessions';
 
-class App extends Component {
+class TimerTaskApp extends Component {
   constructor(props) {
     super(props);
     let countdown;
@@ -128,4 +128,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default TimerTaskApp;

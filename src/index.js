@@ -1,34 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import TimerTaskApp from './Components/TimerTaskApp';
 import UserStats from './Components/UserStats';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import reducer from './reducers';
+import reducer from './Reducers';
 import thunk from 'redux-thunk';
 
 import * as serviceWorker from './serviceWorker';
 
-const initialState = {
-    clockStatus: {
-        isTicking: false,
-        sessionsCompleted: []
-    }}
-
 const store = createStore(
     reducer, 
-    initialState,
     applyMiddleware(thunk)
 );
 
 ReactDOM.render(
     <Router>
         <Provider store={store}>
-            <Route path='/' exact component={App} />
+            <Route path='/' exact component={TimerTaskApp} />
             <Route path='/myStats' component={UserStats} />
         </Provider>
     </Router>, 

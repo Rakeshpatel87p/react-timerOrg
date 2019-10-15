@@ -2,7 +2,7 @@ import {
     WRITE_TASK_DB_BEGIN,
     WRITE_TASK_DB_SUCCESS,
     WRITE_TASK_DB_FAILURE
-} from '../actions';
+} from '../Actions';
 
 export default function workSessions(state = {}, action) {
     switch(action.type) {
