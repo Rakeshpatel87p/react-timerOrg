@@ -18,11 +18,11 @@ class TimerHeader extends Component {
             { this.props.inputToggle ?
                 <form onSubmit={(e) => this.props.handleSubmit(e)}> 
                     <input 
-                        onClick={this.props.toggleInput} 
+                        onClick={this.props.toggleInput}
+                        onChange={this.props.handleChange}  
                         className="timer timerInput" 
                         name="timeInput" 
                         placeholder={this.formatTime()} 
-                        onChange={this.props.handleChange} 
                         autoFocus={true} 
                     />
                 </form> : 

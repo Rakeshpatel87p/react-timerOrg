@@ -38,7 +38,7 @@ class App extends Component {
       });
     }, 1000);
 
-    this.setState({intervalId: this.countdown, isTicking: true})
+    this.setState({intervalId: this.countdown, inputToggle: false, isTicking: true})
   }
 
   timerComplete = () => {
@@ -54,7 +54,8 @@ class App extends Component {
     event.preventDefault();
     let mins = event.target.value * 60 || this.state.secondsRemaining;
     if (mins > 0) {
-      this.setState({secondsRemaining: mins, intervalId: undefined, inputToggle: false});
+      //Awkward UI result if waiting for startTimer to run
+      this.setState({secondsRemaining: mins});
       this.startTimer(mins);
     }
   }
@@ -113,7 +114,7 @@ class App extends Component {
           )}
         </div>
         <TimeOperators
-          isTicking={this.props.isTicking} 
+          isTicking={this.state.isTicking} 
           handleSubmit={this.handleSubmit} 
           clearTimer={this.clearTimer} 
           pauseTimer={this.pauseTimer}
