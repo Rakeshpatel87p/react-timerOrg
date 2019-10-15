@@ -7,7 +7,7 @@ class TaskInput extends Component {
     render() {
         return (
             <div>
-                {this.props.isTicking || this.props.currentTask ?
+                {this.props.currentTask ?
                     <div>
                         <h2>I'm <span>{this.props.currentTask}</span></h2>
                     </div>
@@ -15,7 +15,6 @@ class TaskInput extends Component {
                     <form onSubmit={this.props.writeTaskDb({"sessionTime" : 100, "task" : "test"})}> 
                         <input 
                             autoFocus={true}
-                            onChange={this.handleChange}
                             name="task" 
                             placeholder={'Enter Task Here'}
                         />

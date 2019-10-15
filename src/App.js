@@ -12,10 +12,12 @@ class App extends Component {
     super(props);
     let countdown;
     this.state = {
+      timedSession: 0,
       secondsRemaining: 0,
       intervalId: countdown,
       inputToggle: false,
-      tasks: []
+      task: null
+
     };
     this.quickTimers = [15, 25, 30];
   }
@@ -29,6 +31,9 @@ class App extends Component {
       const secondsLeft = Math.round((then - Date.now()) / 1000);
 
       if (secondsLeft < 0) {
+        //take entered task if exist
+        //take countdown start
+        //dispatch action to write sessionComplete to db
         clearInterval(this.countdown);
         this.props.dispatch(timedSessions({sessionTime: mins, task: 'test', timeStampStart: now}))
         return
@@ -39,7 +44,7 @@ class App extends Component {
     }, 1000);
     this.setState({intervalId: this.countdown})
     this.props.dispatch(isTicking(true));
-    this.props.dispatch(timedSessions({sessionTime: mins, task: 'test', timeStampStart: 0}))
+    //this.props.dispatch(timedSessions({sessionTime: mins, task: 'test', timeStampStart: 0}))
   }
 
   handleSubmit = (event) => {
@@ -53,10 +58,10 @@ class App extends Component {
 
   handleTaskSubmit = (event) => {
     event.preventDefault();
-    let task = event.target.task.value;
+    let enteredTask = event.target.task.value;
     this.setState((prevState) => ({
         ...prevState,
-        tasks: [...prevState.tasks, {task}]
+        task: enteredTask
     }))
     event.target.task.value = '';
   }
@@ -112,15 +117,13 @@ class App extends Component {
         </div>
         <TimeOperators
           isTicking={this.props.isTicking} 
-          inputToggle={this.state.inputToggle} 
           handleSubmit={this.handleSubmit} 
           clearTimer={this.clearTimer} 
           pauseTimer={this.pauseTimer}
         />
         <TaskInput 
-          isTicking={this.props.isTicking} 
           handleTaskSubmit={this.handleTaskSubmit}
-          currentTask={this.state.tasks.length > 0 ? this.state.tasks[this.state.tasks.length - 1].task : null}
+          currentTask={this.state.task}
         />
       </div>
     )
