@@ -12,13 +12,13 @@ class UserStats extends Component {
 
     componentDidMount() {
         const { fetchTimedSessions } = this.props;
-        const x = fetchTimedSessions()
-        //console.log(x);
-        //x.then((res) => console.log(res));
+        //updates state
+        fetchTimedSessions()
     }
 
     organizeData = (data) => {
         console.log(data);
+        
         data.forEach((item) => {
             if (!Object.keys(this.sortedTasks).includes(item.task)) {
                 this.sortedTasks[item.task] = {
@@ -32,33 +32,38 @@ class UserStats extends Component {
                 }
             }
         })
+        return this.sortedTasks
     }
 
     render() {
-
+        const {sessions} = this.props
         return (
             <div>
-                {(this.props.fetchObj.loading) ? 
-                    <h2>Crunching the Numbers...</h2> :
-                    <div>
-                        <h1>How I'm Doing:</h1> 
-                        <BarChart 
-                            data={[{"data": [20, 30, 40]}]}
-                            title="Work Over Time"
-                            color="#70CAD1"
-                            chartType="doughnut"
-                            id="pieChart1"
-                        />
-                        <BarChart 
-                            data={this.sortedTasks}
-                            title="Work Over Time - Line"
-                            color="#70CAD1"
-                            chartType="line"
-                            id="lineChart1"
-                        />
-                        <TaskTable 
-                        />
-                    </div>
+                {!sessions ? 
+                    <h2>Crunching the Numbers...</h2> : 
+                    (
+                        <div>
+                            <h1>How I'm Doing:</h1> 
+                            <BarChart 
+                                data={[{
+                                    "data": sessions.map((sess) => sess.sessionTime)
+                                }]}
+                                title="Work Over Time"
+                                color="#70CAD1"
+                                chartType="doughnut"
+                                id="pieChart1"
+                            />
+                            <BarChart 
+                                data={this.organizeData(sessions)}
+                                title="Work Over Time - Line"
+                                color="#70CAD1"
+                                chartType="line"
+                                id="lineChart1"
+                            />
+                            <TaskTable 
+                            />
+                        </div>
+                    )
                 }
             </div>
         )
@@ -75,13 +80,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     //clean data here
     return {
-       fetchTimedSessions: () => {
-           const data = dispatch(fetchTimedSessions());
-           console.log(data);
-           data.then((res) => console.log(res))
-           return data
-        },
-       fetchTimedSessionsSuccess: () => {dispatch(fetchTimedSessionsSuccess())}
+       fetchTimedSessions: () => dispatch(fetchTimedSessions())
     }
 }
 
