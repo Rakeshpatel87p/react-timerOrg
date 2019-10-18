@@ -17,8 +17,7 @@ class UserStats extends Component {
     }
 
     organizeData = (data) => {
-        console.log(data);
-        
+
         data.forEach((item) => {
             if (!Object.keys(this.sortedTasks).includes(item.task)) {
                 this.sortedTasks[item.task] = {
@@ -60,7 +59,8 @@ class UserStats extends Component {
                                 chartType="line"
                                 id="lineChart1"
                             />
-                            <TaskTable 
+                            <TaskTable
+                                data={sessions}
                             />
                         </div>
                     )
