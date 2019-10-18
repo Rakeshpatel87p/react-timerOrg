@@ -3,6 +3,9 @@ import TimerHeader from './Timer/TimerHeader';
 import TimeOperators from './Timer/TimeOperators';
 import TaskInput from './Timer/TaskInput';
 
+import { connect } from 'react-redux';
+
+import { writeTaskDb } from '../Actions/';
 import { timedSessions } from '../Actions/timedSessions';
 
 class TimerTaskApp extends Component {
@@ -29,8 +32,10 @@ class TimerTaskApp extends Component {
     this.countdown = setInterval(() => {
       const secondsLeft = Math.round((then - Date.now()) / 1000);
 
-      if (secondsLeft < 0) {
-        this.timerComplete();
+      if (secondsLeft === 0) {
+        this.submitTaskToDb();
+        this.clearTimer();
+        //this.timerComplete();
       }
 
       this.setState({
@@ -38,7 +43,14 @@ class TimerTaskApp extends Component {
       });
     }, 1000);
 
-    this.setState({intervalId: this.countdown, inputToggle: false, isTicking: true})
+    this.setState({timedSession: mins, intervalId: this.countdown, inputToggle: false, isTicking: true})
+  }
+
+  submitTaskToDb = () => {
+    this.props.writeTaskDb({
+      sessionTime: this.state.timedSession, 
+      task: this.state.task
+    })
   }
 
   timerComplete = () => {
@@ -128,4 +140,16 @@ class TimerTaskApp extends Component {
   }
 }
 
-export default TimerTaskApp;
+function mapStateToProps(state) {
+  return {
+    workSessions: state.response
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    writeTaskDb: (sessions) => dispatch(writeTaskDb(sessions))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TimerTaskApp);

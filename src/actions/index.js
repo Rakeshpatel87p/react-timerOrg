@@ -24,7 +24,7 @@ export function inputToggle(bool) {
 export function writeTaskDb(session) {
     return (dispatch) => {
         dispatch(writeTaskDbBegin());
-        rakeshWorkSessions.set({
+        rakeshWorkSessions.push({
             "sessionTime" : session.sessionTime,
             "task": session.task
         });
