@@ -7,7 +7,7 @@ class TaskTable extends Component {
             <div>
                 <h2>All Sessions</h2>  
                 <ul>
-                    {this.props.data.map((item) => {
+                    {this.props.data.map((i, item) => {
                         return <li>{`task: ${item.task} | time spend: ${item.sessionTime}`}</li>
                     })}
                 </ul>

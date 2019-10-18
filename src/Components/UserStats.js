@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import BarChart from './Charts/BarChart';
 import TaskTable from './Charts/TaskTable';
-import { fetchTimedSessions, fetchTimedSessionsSuccess } from '../Actions/timedSessions';
+import { fetchTimedSessions } from '../Actions/timedSessions';
 import { connect } from 'react-redux';
 
 class UserStats extends Component {

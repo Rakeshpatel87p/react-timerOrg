@@ -1,9 +1,6 @@
 import React, {Component} from 'react'
 
 class TimerHeader extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     formatTime = () => {
         const minutes = Math.floor(this.props.secondsRemaining / 60);

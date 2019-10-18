@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import Chart from "chart.js";
 
-let myLineChart;
-
 class BarChart extends Component {
     constructor(props) {
         super(props);
         this.chartRef = React.createRef();
+        this.myLineChart = null;
     }
     
     componentDidMount() {
@@ -14,7 +13,6 @@ class BarChart extends Component {
     }
     
     buildChart = () => {
-        const myChartRef = this.chartRef.current.getContext("2d");
         const sortedTasks = this.props.data;
         let tasksDataSet = [];
         
@@ -30,7 +28,7 @@ class BarChart extends Component {
             tasksDataSet = sortedTasks
         }
 
-        myLineChart = new Chart(this.props.id, {
+        this.myLineChart = new Chart(this.props.id, {
             type: this.props.chartType,
             data: {
                 datasets: tasksDataSet

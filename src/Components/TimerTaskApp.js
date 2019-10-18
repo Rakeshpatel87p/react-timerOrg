@@ -6,7 +6,6 @@ import TaskInput from './Timer/TaskInput';
 import { connect } from 'react-redux';
 
 import { writeTaskDb } from '../Actions/';
-import { timedSessions } from '../Actions/timedSessions';
 
 class TimerTaskApp extends Component {
   constructor(props) {
@@ -35,7 +34,6 @@ class TimerTaskApp extends Component {
       if (secondsLeft === 0) {
         this.submitTaskToDb();
         this.clearTimer();
-        //this.timerComplete();
       }
 
       this.setState({
@@ -51,15 +49,6 @@ class TimerTaskApp extends Component {
       sessionTime: this.state.timedSession, 
       task: this.state.task
     })
-  }
-
-  timerComplete = () => {
-    //take entered task if exist
-    //take countdown start
-    //dispatch action to write sessionComplete to db
-    clearInterval(this.countdown);
-    //this.props.dispatch(timedSessions({sessionTime: mins, task: 'test', timeStampStart: now}))
-    return
   }
 
   handleSubmit = (event) => {
