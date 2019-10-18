@@ -5,33 +5,28 @@ import { fetchTimedSessions } from '../Actions/timedSessions';
 import { connect } from 'react-redux';
 
 class UserStats extends Component {
-    constructor(props) {
-        super(props);
-        this.sortedTasks = {};
-    }
 
     componentDidMount() {
         const { fetchTimedSessions } = this.props;
-        //updates state
         fetchTimedSessions()
     }
 
     organizeData = (data) => {
-
+        const sortedTasks = {};
         data.forEach((item) => {
-            if (!Object.keys(this.sortedTasks).includes(item.task)) {
-                this.sortedTasks[item.task] = {
+            if (!Object.keys(sortedTasks).includes(item.task)) {
+                sortedTasks[item.task] = {
                     "sessionTimes": ["Test1"],
                     "durations" : [item.sessionTime]
                 }
             } else {
-                this.sortedTasks[item.task] = {
-                    ...this.sortedTasks[item.task],
-                    durations: [...this.sortedTasks[item.task].durations, item.sessionTime]
+                sortedTasks[item.task] = {
+                    ...sortedTasks[item.task],
+                    durations: [sortedTasks[item.task].durations, item.sessionTime]
                 }
             }
         })
-        return this.sortedTasks
+        return sortedTasks
     }
 
     render() {
@@ -72,7 +67,6 @@ class UserStats extends Component {
 
 function mapStateToProps(state) {
     return {
-        fetchObj: state.timedSessions,
         sessions: state.timedSessions.sessions
     }
 }
