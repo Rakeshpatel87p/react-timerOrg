@@ -1,7 +1,7 @@
 import * as firebase from 'firebase';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAOKgsJYYHIemdosMA3v_k5ot_BRy5YCZg",
+    apiKey: "",
     authDomain: "productivity-1f520.firebaseapp.com",
     databaseURL: "https://productivity-1f520.firebaseio.com",
     projectId: "productivity-1f520",
