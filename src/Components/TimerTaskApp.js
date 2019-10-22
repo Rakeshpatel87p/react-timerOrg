@@ -86,17 +86,10 @@ class TimerTaskApp extends Component {
     this.setState({inputToggle: !this.state.inputToggle, isTicking: false});
     clearInterval(this.props.intervalId);
   }
-
-  bckgrdColorEffect = () => {
-    const countdownTime = 25 * 60;
-    const origVal = 249;
-    const ratio = origVal - (((countdownTime - this.state.secondsRemaining + 1) / countdownTime) * 249);
-    return {background: `rgb(${ratio <= 0 ? origVal : ratio}, 98, 71)`}
-  }
   
   render() {
     return (
-      <div className="App" style={this.bckgrdColorEffect()}>
+      <div className="App">
         <TimerHeader 
           toggleInput={this.toggleInput} 
           intervalId={this.state.intervalId} 
