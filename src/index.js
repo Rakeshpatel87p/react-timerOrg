@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import TimerTaskApp from './Components/TimerTaskApp';
 import UserStats from './Components/UserStats';
+import LoginPrompt from './Components/Login/LoginPrompt';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
@@ -24,6 +25,7 @@ ReactDOM.render(
         <Provider store={store}>
             <Route path='/' exact component={TimerTaskApp} />
             <Route path='/myStats' component={UserStats} />
+            <Route path='/login' component={LoginPrompt} />
         </Provider>
     </Router>, 
     document.getElementById('root'));
