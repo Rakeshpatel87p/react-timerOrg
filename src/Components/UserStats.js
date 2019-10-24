@@ -38,26 +38,15 @@ class UserStats extends Component {
                     <h2>Crunching the Numbers...</h2> : 
                     (
                         <div>
-                            
                             <h1><Link to={'/'}><span>&#8592;</span></Link> How I'm Doing:</h1> 
                             <BarChart 
                                 data={[{
-                                    "data": sessions.map((sess) => sess.sessionTime)
+                                    "data": Object.keys(sessions).map((sess) => sessions[sess].sessionTime)
                                 }]}
                                 title="Work Over Time"
                                 color="#70CAD1"
                                 chartType="doughnut"
                                 id="pieChart1"
-                            />
-                            <BarChart 
-                                data={this.organizeData(sessions)}
-                                title="Work Over Time - Line"
-                                color="#70CAD1"
-                                chartType="line"
-                                id="lineChart1"
-                            />
-                            <TaskTable
-                                data={sessions}
                             />
                         </div>
                     )
