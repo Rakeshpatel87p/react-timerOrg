@@ -14,16 +14,16 @@ class UserStats extends Component {
 
     organizeData = (data) => {
         const sortedTasks = {};
-        data.forEach((item) => {
-            if (!Object.keys(sortedTasks).includes(item.task)) {
-                sortedTasks[item.task] = {
+        Object.keys(data).forEach((item) => {
+            if (!Object.keys(sortedTasks).includes(data[item].task)) {
+                sortedTasks[data[item].task] = {
                     "sessionTimes": ["Test1"],
                     "durations" : [item.sessionTime]
                 }
             } else {
-                sortedTasks[item.task] = {
-                    ...sortedTasks[item.task],
-                    durations: [sortedTasks[item.task].durations, item.sessionTime]
+                sortedTasks[data[item].task] = {
+                    ...sortedTasks[data[item].task],
+                    durations: [sortedTasks[data[item].task].durations, data[item].sessionTime]
                 }
             }
         })
@@ -47,6 +47,16 @@ class UserStats extends Component {
                                 color="#70CAD1"
                                 chartType="doughnut"
                                 id="pieChart1"
+                            />
+                            <BarChart 
+                                data={this.organizeData(sessions)}
+                                title="Work Over Time - Line"
+                                color="#70CAD1"
+                                chartType="line"
+                                id="lineChart1"
+                            />
+                            <TaskTable
+                                data={sessions}
                             />
                         </div>
                     )
