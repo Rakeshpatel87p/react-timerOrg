@@ -5,7 +5,7 @@ export class LoginBar extends Component {
     render() {
         return (
             <div>
-                <Link to={'/login'}>Login</Link>
+                <Link to={'/login'} style={{display: 'none'}}>Login</Link>
             </div>
         );
     }
