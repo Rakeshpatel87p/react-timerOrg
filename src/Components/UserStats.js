@@ -3,6 +3,7 @@ import BarChart from './Charts/BarChart';
 import TaskTable from './Charts/TaskTable';
 import { fetchTimedSessions } from '../Actions/timedSessions';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class UserStats extends Component {
 
@@ -37,7 +38,8 @@ class UserStats extends Component {
                     <h2>Crunching the Numbers...</h2> : 
                     (
                         <div>
-                            <h1>How I'm Doing:</h1> 
+                            
+                            <h1><Link to={'/'}><span>&#8592;</span></Link> How I'm Doing:</h1> 
                             <BarChart 
                                 data={[{
                                     "data": sessions.map((sess) => sess.sessionTime)

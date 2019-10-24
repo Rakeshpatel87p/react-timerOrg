@@ -3,6 +3,7 @@ import TimerHeader from './Timer/TimerHeader';
 import TimeOperators from './Timer/TimeOperators';
 import TaskInput from './Timer/TaskInput';
 import LoginBar from './Login/LoginBar';
+import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
@@ -91,6 +92,7 @@ class TimerTaskApp extends Component {
   render() {
     return (
       <div className="App">
+        <Link to={'/myStats'}>My Stats</Link>
         <LoginBar />
         <TimerHeader 
           toggleInput={this.toggleInput} 
