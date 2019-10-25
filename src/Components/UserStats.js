@@ -6,12 +6,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 class UserStats extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            displayMockData: false,
-        }
-    }
 
     componentDidMount() {
         const { fetchTimedSessions } = this.props;
@@ -36,10 +30,6 @@ class UserStats extends Component {
         return sortedTasks
     }
 
-    toggleMockData = () => {
-        this.setState({displayMockData: true});
-    }
-
     render() {
         const {sessions} = this.props
         return (
@@ -49,7 +39,6 @@ class UserStats extends Component {
                     (
                         <div>
                             <h1><Link to={'/'}><span>&#8592;</span></Link> How I'm Doing:</h1>
-                            <button onClick={this.toggleMockData}>Mock Data</button> 
                             <BarChart 
                                 data={[{
                                     "data": Object.keys(sessions).map((sess) => sessions[sess].sessionTime)
