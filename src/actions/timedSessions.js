@@ -1,5 +1,3 @@
-import { mockSessionsDataRef, rakeshWorkSessions } from '../firebase';
-
 export const TIMED_SESSIONS = 'TIMED_SESSIONS';
 export const FETCH_TIMED_SESSIONS_BEGIN = 'FETCH_TIMED_SESSIONS_BEGIN';
 export const FETCH_TIMED_SESSIONS_SUCCESS = 'FETCH_TIMED_SESSIONS_SUCCESS';
@@ -18,9 +16,6 @@ export function fetchTimedSessions() {
     return (dispatch) => {
         //console.log(dataRef);
         dispatch(fetchTimedSessionsBegin())
-        rakeshWorkSessions.once('value').then((snapshot) => {
-            dispatch(fetchTimedSessionsSuccess(snapshot.val()));
-        })
     }
 }
 

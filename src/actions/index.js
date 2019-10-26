@@ -1,5 +1,3 @@
-import { rakeshWorkSessions } from '../firebase';
-
 export const IS_TICKING = 'IS_TICKING';
 export const INPUT_TOGGLE = 'INPUT_TOGGLE';
 export const WRITE_TASK_DB_BEGIN = 'WRITE_TASK_DB_BEGIN';
@@ -24,10 +22,6 @@ export function inputToggle(bool) {
 export function writeTaskDb(session) {
     return (dispatch) => {
         dispatch(writeTaskDbBegin());
-        rakeshWorkSessions.push({
-            "sessionTime" : session.sessionTime,
-            "task": session.task
-        });
         const msg = 'success';
         dispatch(writeTaskDbSuccess(msg));
 

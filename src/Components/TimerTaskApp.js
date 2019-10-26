@@ -7,8 +7,6 @@ import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
-import { writeTaskDb } from '../Actions/';
-
 class TimerTaskApp extends Component {
   constructor(props) {
     super(props);
@@ -47,10 +45,6 @@ class TimerTaskApp extends Component {
   }
 
   submitTaskToDb = () => {
-    this.props.writeTaskDb({
-      sessionTime: this.state.timedSession, 
-      task: this.state.task
-    })
   }
 
   handleSubmit = (event) => {
@@ -132,10 +126,4 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    writeTaskDb: (sessions) => dispatch(writeTaskDb(sessions))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TimerTaskApp);
+export default connect(mapStateToProps)(TimerTaskApp);
