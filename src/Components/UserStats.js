@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 import BarChart from './Charts/BarChart';
 import TaskTable from './Charts/TaskTable';
-import { fetchTimedSessions } from '../Actions/timedSessions';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 class UserStats extends Component {
 
     componentDidMount() {
-        const { fetchTimedSessions } = this.props;
-        fetchTimedSessions()
+        //const { fetchTimedSessions } = this.props;
+        //fetchTimedSessions()
+        this.fetchLocalStorage()
+    }
+
+    fetchLocalStorage = () => {
+        const userData = JSON.parse(localStorage.getItem('timerTaskApp'))
+        console.log(userData);
     }
 
     organizeData = (data) => {
@@ -66,17 +70,4 @@ class UserStats extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        sessions: state.timedSessions.sessions
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-    //clean data here
-    return {
-       fetchTimedSessions: () => dispatch(fetchTimedSessions())
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserStats)
+export default UserStats

@@ -5,8 +5,6 @@ import TaskInput from './Timer/TaskInput';
 import LoginBar from './Login/LoginBar';
 import { Link } from 'react-router-dom';
 
-import { connect } from 'react-redux';
-
 class TimerTaskApp extends Component {
   constructor(props) {
     super(props);
@@ -102,7 +100,6 @@ class TimerTaskApp extends Component {
     return (
       <div className="App">
         {this.state.localStoragePresent &&  <Link to={'/myStats'}>My Stats</Link>}
-       
         <LoginBar />
         <TimerHeader 
           toggleInput={this.toggleInput} 
@@ -136,10 +133,4 @@ class TimerTaskApp extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    workSessions: state.response
-  }
-}
-
-export default connect(mapStateToProps)(TimerTaskApp);
+export default TimerTaskApp;
