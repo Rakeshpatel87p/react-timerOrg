@@ -45,6 +45,19 @@ class TimerTaskApp extends Component {
   }
 
   submitTaskToDb = () => {
+    //check to see if localStorage info exists
+    const itemEntry = 'timerTaskApp';
+    const { timedSession, task } = this.state;
+    const localStorageSess = localStorage.getItem(itemEntry)
+    
+    if (localStorageSess) {
+      const dataParsed = JSON.parse(localStorageSess);
+      const dataUpdated = [...dataParsed, {timedSession, task}]
+      localStorage.setItem(itemEntry, JSON.stringify(dataUpdated));
+    } else {
+      const dataToStore = JSON.stringify([{timedSession, task}]);
+      localStorage.setItem(itemEntry, dataToStore);
+    }
   }
 
   handleSubmit = (event) => {
