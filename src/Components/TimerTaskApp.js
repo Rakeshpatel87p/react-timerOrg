@@ -17,7 +17,8 @@ class TimerTaskApp extends Component {
       intervalId: countdown,
       inputToggle: false,
       task: null,
-      isTicking: false
+      isTicking: false,
+      localStoragePresent: false
 
     };
     this.quickTimers = [15, 25, 30];
@@ -54,6 +55,7 @@ class TimerTaskApp extends Component {
       const dataParsed = JSON.parse(localStorageSess);
       const dataUpdated = [...dataParsed, {timedSession, task}]
       localStorage.setItem(itemEntry, JSON.stringify(dataUpdated));
+      this.setState({localStoragePresent: true});
     } else {
       const dataToStore = JSON.stringify([{timedSession, task}]);
       localStorage.setItem(itemEntry, dataToStore);
@@ -99,7 +101,8 @@ class TimerTaskApp extends Component {
   render() {
     return (
       <div className="App">
-        <Link to={'/myStats'}>My Stats</Link>
+        {this.state.localStoragePresent &&  <Link to={'/myStats'}>My Stats</Link>}
+       
         <LoginBar />
         <TimerHeader 
           toggleInput={this.toggleInput} 
