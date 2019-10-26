@@ -11,9 +11,9 @@ import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
     <Router>
-            <Route path='/' exact component={TimerTaskApp} />
-            <Route path='/myStats' component={UserStats} />
-            <Route path='/login' component={LoginPrompt} />
+        <Route path='/' exact component={TimerTaskApp} />
+        <Route path='/myStats' component={UserStats} />
+        <Route path='/login' component={LoginPrompt} />
     </Router>, 
     document.getElementById('root'));
 
