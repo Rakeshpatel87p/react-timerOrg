@@ -4,16 +4,19 @@ import TaskTable from './Charts/TaskTable';
 import { Link } from 'react-router-dom';
 
 class UserStats extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
 
     componentDidMount() {
-        //const { fetchTimedSessions } = this.props;
-        //fetchTimedSessions()
         this.fetchLocalStorage()
     }
 
     fetchLocalStorage = () => {
-        const userData = JSON.parse(localStorage.getItem('timerTaskApp'))
+        const userData = JSON.parse(localStorage.getItem('timerTaskApp'));
         console.log(userData);
+        this.setState({sessions: this.organizeData(userData)});
     }
 
     organizeData = (data) => {
@@ -35,12 +38,12 @@ class UserStats extends Component {
     }
 
     render() {
-        const {sessions} = this.props
+        const {sessions} = this.state
         return (
             <div>
                 {!sessions ? 
                     <h2>Crunching the Numbers...</h2> : 
-                    (
+                    (   
                         <div>
                             <h1><Link to={'/'}><span>&#8592;</span></Link> How I'm Doing:</h1>
                             <BarChart 
@@ -53,7 +56,7 @@ class UserStats extends Component {
                                 id="pieChart1"
                             />
                             <BarChart 
-                                data={this.organizeData(sessions)}
+                                data={sessions}
                                 title="Work Over Time - Line"
                                 color="#70CAD1"
                                 chartType="line"
