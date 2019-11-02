@@ -25,14 +25,17 @@ class UserStats extends Component {
         Object.keys(data).forEach((item) => {
             if (!Object.keys(sortedTasks).includes(data[item].task)) {
                 sortedTasks[data[item].task] = {
-                    "durations" : data[item].timedSession
+                    "durations" : [data[item].timedSession]
                 }
-            } else {
+            } 
+            
+            else {
                 sortedTasks[data[item].task] = {
-                    ...sortedTasks[data[item].task],
-                    durations: [sortedTasks[data[item].task].durations, data[item].timedSession]
+                    ...sortedTasks[data[item]],
+                    durations: [...sortedTasks[data[item].task].durations, data[item].timedSession]
                 }
             }
+            
         })
         return sortedTasks
     }
