@@ -17,6 +17,7 @@ class UserStats extends Component {
         const userData = JSON.parse(localStorage.getItem('timerTaskApp'));
         console.log(userData);
         this.setState({sessions: this.organizeData(userData)});
+        console.log(this.state);
     }
 
     organizeData = (data) => {
@@ -24,13 +25,12 @@ class UserStats extends Component {
         Object.keys(data).forEach((item) => {
             if (!Object.keys(sortedTasks).includes(data[item].task)) {
                 sortedTasks[data[item].task] = {
-                    "sessionTimes": ["Test1"],
-                    "durations" : [item.sessionTime]
+                    "durations" : data[item].timedSession
                 }
             } else {
                 sortedTasks[data[item].task] = {
                     ...sortedTasks[data[item].task],
-                    durations: [sortedTasks[data[item].task].durations, data[item].sessionTime]
+                    durations: [sortedTasks[data[item].task].durations, data[item].timedSession]
                 }
             }
         })
