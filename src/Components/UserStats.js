@@ -54,8 +54,9 @@ class UserStats extends Component {
                             <h1><Link to={'/'}><span>&#8592;</span></Link> How I'm Doing:</h1>
                             <BarChart 
                                 data={[{
-                                    "data": Object.keys(sessions).map((sess) => sessions[sess].sessionTime)
+                                    "data": Object.keys(sessions).map((sess) => sessions[sess].totalTime),
                                 }]}
+                                labels={["Red", "Blue"]}
                                 title="Work Over Time"
                                 color="#70CAD1"
                                 chartType="doughnut"
