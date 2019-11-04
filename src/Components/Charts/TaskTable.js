@@ -7,8 +7,12 @@ class TaskTable extends Component {
             <div>
                 <h2>All Sessions</h2>  
                 <ul>
-                    {Object.keys(data).map((item, i) => {
-                        return <li key={i}>{`task: ${data[item].task} | time spend: ${data[item].sessionTime}`}</li>
+                    {Object.keys(data).map((item) => {
+                        const liItems = data[item].durations.map((duration, i) => {
+                            return <li key={i}>{`task: ${item} | time spent: ${duration}`}</li>
+                        })
+                        return liItems
+                        //return <li key={i}>{`task: ${item} | time spend: ${data[item].sessionTime}`}</li>
                     })}
                 </ul>
             </div>
