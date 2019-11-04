@@ -54,7 +54,7 @@ class UserStats extends Component {
                                 data={[{
                                     "data": Object.keys(sessions).map((sess) => sessions[sess].totalTime),
                                 }]}
-                                labels={["Red", "Blue"]}
+                                labels={Object.keys(sessions)}
                                 title="Work Over Time"
                                 color="#70CAD1"
                                 chartType="doughnut"
