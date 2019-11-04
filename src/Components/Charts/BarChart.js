@@ -6,7 +6,6 @@ class BarChart extends Component {
         super(props);
         this.chartRef = React.createRef();
         this.myLineChart = null;
-        let tasksDataSet = [];
     }
     
     componentDidMount() {
@@ -16,11 +15,11 @@ class BarChart extends Component {
     createLineChart = () => {
         return { 
             datasets: Object
-                        .keys(this.props.data.sortedTasks)
+                        .keys(this.props.data)
                         .map((key) => {
                             return {
                                 label: key,
-                                data: this.props.data.sortedTasks[key].durations,
+                                data: this.props.data[key].durations,
                                 fill: true
                             }
                         }),
@@ -30,22 +29,24 @@ class BarChart extends Component {
 
     createDoughnutChart = () => {
         return {
-            datasets: this.props.data.sortedTasks,
+            datasets: this.props.data,
             labels: ["Red", "Blue"]
         }
     }
     
     buildChart = () => {
-        const {sortedTasks, chartType} = this.props.data;
-        if (chartType === "line") {
-            this.tasksDataSet = this.createLineChart()
+        
+        if (this.props.chartType === "line") {
+            this.tasksDataSet = this.createLineChart();
+            console.log(this.tasksDataSet);
         } 
-        else if (chartType === "doughnut") {
+        else if (this.props.chartType === "doughnut") {
             this.tasksDataSet = this.createDoughnutChart();
+            console.log(this.tasksDataSet);
         }
 
         this.myLineChart = new Chart(this.props.id, {
-            type: chartType,
+            type: this.props.chartType,
             data: this.tasksDataSet
         });
     }
