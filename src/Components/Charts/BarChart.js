@@ -28,26 +28,23 @@ class BarChart extends Component {
     }
 
     createDoughnutChart = () => {
+        const { data, labels } = this.props;
         return {
-            datasets: this.props.data,
-            labels: ["Red", "Blue"]
+            datasets: data,
+            labels: labels,
         }
     }
     
     buildChart = () => {
-        
         if (this.props.chartType === "line") {
             this.tasksDataSet = this.createLineChart();
-            console.log(this.tasksDataSet);
         } 
         else if (this.props.chartType === "doughnut") {
             this.tasksDataSet = this.createDoughnutChart();
-            console.log(this.tasksDataSet);
         }
-
         this.myLineChart = new Chart(this.props.id, {
             type: this.props.chartType,
-            data: this.tasksDataSet
+            data: this.tasksDataSet,
         });
     }
     
