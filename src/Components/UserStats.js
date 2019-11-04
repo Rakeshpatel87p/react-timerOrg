@@ -10,14 +10,12 @@ class UserStats extends Component {
     }
 
     componentDidMount() {
-        this.fetchLocalStorage()
+        this.fetchLocalStorage();
     }
 
     fetchLocalStorage = () => {
         const userData = JSON.parse(localStorage.getItem('timerTaskApp'));
-        console.log(userData);
         this.setState({sessions: this.organizeData(userData)});
-        console.log(this.state);
     }
 
     organizeData = (data) => {
