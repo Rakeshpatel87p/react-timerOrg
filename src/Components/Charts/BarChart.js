@@ -13,6 +13,8 @@ class BarChart extends Component {
     }
 
     createLineChart = () => {
+        const maxLength = this.xAxisValue();
+
         return { 
             datasets: Object
                         .keys(this.props.data)
@@ -23,7 +25,7 @@ class BarChart extends Component {
                                 fill: true
                             }
                         }),
-            labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+            labels: new Array(maxLength)
         }
     }
 
@@ -33,6 +35,19 @@ class BarChart extends Component {
             datasets: data,
             labels: labels,
         }
+    }
+
+    xAxisValue = () => {
+        const data = this.props.data;
+
+        const maxLength = 
+            Math.max(...Object
+                .keys(data)
+                .map(item => {
+                return data[item].durations.length
+            }))
+
+        return maxLength
     }
     
     buildChart = () => {
